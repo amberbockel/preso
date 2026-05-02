@@ -1,0 +1,150 @@
+/* Ambermiro Creative — Colors & Type
+   Typography: SUSE Mono (Headlines) + SUSE (Body)
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&family=SUSE+Mono:wght@400..700&display=swap");
+
+:root {
+  /* ── Brand Gradient Stops ────────────────────────────────────── */
+  --brand-blue:        #5C7CFA;
+  --brand-blue-deep:   #3F5BD9;
+  --brand-violet:      #8B5CF6;
+  --brand-pink:        #EC9CC9;
+  --brand-peach:       #F4A584;
+  --brand-mint:        #C8E5DA;
+
+  /* ── Neutral Surfaces (Light) ────────────────────────────────── */
+  --bg-app:            #F2F3FA;
+  --bg-page:           #FFFFFF;
+  --bg-elev-1:         #FFFFFF;
+  --bg-elev-2:         #F7F8FB;
+  --bg-glass:          rgba(255, 255, 255, 0.45);
+  --bg-glass-strong:   rgba(255, 255, 255, 0.75);
+  --bg-glass-stroke:   rgba(255, 255, 255, 0.7);
+
+  /* ── Neutral Surfaces (Dark) ─────────────────────────────────── */
+  --bg-app-dark:       #0B0D14;
+  --bg-elev-1-dark:    #14161F;
+  --bg-elev-2-dark:    #1B1E2A;
+  --bg-glass-dark:     rgba(20, 22, 31, 0.55);
+
+  /* ── Foreground (Text) ───────────────────────────────────────── */
+  --fg-1:              #0F1115;   /* Headings */
+  --fg-2:              #2B2F3A;   /* Body */
+  --fg-3:              #5B6172;   /* Secondary */
+  --fg-4:              #8C93A4;   /* Placeholder */
+  --fg-5:              #C2C7D2;   /* Disabled */
+  --fg-on-brand:       #FFFFFF;
+
+  /* ── Strokes & Dividers ──────────────────────────────────────── */
+  --stroke-1:          rgba(15, 17, 21, 0.08);
+  --stroke-2:          rgba(15, 17, 21, 0.14);
+  --stroke-glass:      rgba(255, 255, 255, 0.5);
+
+  /* ── Semantic ─────────────────────────────────────────────────── */
+  --success:           #2DB67C;
+  --warning:           #F2B544;
+  --danger:            #E5484D;
+  --info:              #4C6EF5;
+
+  /* ── Type Families ────────────────────────────────────────────── */
+  /* Primary names: --font-header (SUSE Mono) for headlines, --font-body (SUSE) for body. */
+  --font-body:    "SUSE", -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+  --font-header:  "SUSE Mono", "SF Mono", ui-monospace, Menlo, monospace;
+  --font-mono:    "SUSE Mono", "SF Mono", ui-monospace, Menlo, monospace;
+  /* Legacy aliases — keep so existing components don't break */
+  --font-sans:    var(--font-body);
+  --font-display: var(--font-header);
+
+  /* ── Type Scale ──────────────────────────────────────────────── */
+  --fs-display-xl: 80px;   --lh-display-xl: 1.02;  --ls-display-xl: -0.04em;
+  --fs-display-l:  64px;   --lh-display-l:  1.04;  --ls-display-l:  -0.035em;
+  --fs-display-m:  48px;   --lh-display-m:  1.08;  --ls-display-m:  -0.03em;
+
+  --fs-h1: 40px;  --lh-h1: 1.1;   --ls-h1: -0.025em;
+  --fs-h2: 32px;  --lh-h2: 1.15;  --ls-h2: -0.02em;
+  --fs-h3: 24px;  --lh-h3: 1.2;   --ls-h3: -0.015em;
+  --fs-h4: 20px;  --lh-h4: 1.25;  --ls-h4: -0.01em;
+
+  --fs-body-lg: 18px;  --lh-body-lg: 1.55;
+  --fs-body:    16px;  --lh-body:    1.6;
+  --fs-body-sm: 14px;  --lh-body-sm: 1.5;
+  --fs-caption: 12px;  --lh-caption: 1.4;
+  --fs-code:    13px;  --lh-code:    1.55;
+
+  /* ── Weights ──────────────────────────────────────────────────── */
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-display:  800;
+
+  /* ── Radii ────────────────────────────────────────────────────── */
+  --r-xs:   4px;
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-xl:   20px;
+  --r-2xl:  28px;
+  --r-pill: 999px;
+
+  /* ── Spacing Scale ────────────────────────────────────────────── */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+
+  /* ── Shadows & Blur ───────────────────────────────────────────── */
+  --shadow-sm:    0 1px 2px rgba(15, 17, 21, 0.05);
+  --shadow-md:    0 4px 12px rgba(15, 17, 21, 0.06), 0 1px 2px rgba(15, 17, 21, 0.04);
+  --shadow-lg:    0 12px 32px rgba(40, 50, 90, 0.10), 0 2px 6px rgba(15, 17, 21, 0.05);
+  --shadow-xl:    0 24px 64px rgba(40, 50, 90, 0.16), 0 4px 12px rgba(15, 17, 21, 0.06);
+  --shadow-glass: 0 24px 60px rgba(60, 70, 130, 0.18),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --shadow-inner: inset 0 1px 2px rgba(15, 17, 21, 0.06);
+
+  --blur-sm: 8px;
+  --blur-md: 20px;
+  --blur-lg: 40px;
+
+  /* ── Signature Backgrounds ────────────────────────────────────── */
+  --bg-hero: radial-gradient(70% 55% at 95% 0%,   #FF8FB8 0%, transparent 55%),
+             radial-gradient(80% 60% at 0% 100%,  #FFB07A 0%, transparent 55%),
+             radial-gradient(60% 70% at 50% 50%,  #C28BFF 0%, transparent 65%),
+             radial-gradient(45% 55% at 5% 10%,   #7AA8FF 0%, transparent 60%),
+             linear-gradient(180deg, #E5C8F5 0%, #F4D6E1 55%, #FCEFE2 100%);
+  --bg-aurora: linear-gradient(135deg, #8B5CF6 0%, #C77DD9 30%, #EC9CC9 65%, #F4A584 100%);
+  --bg-mesh: radial-gradient(60% 80% at 70% 20%, rgba(176, 124, 247, 0.55), transparent 60%),
+             radial-gradient(60% 80% at 20% 80%, rgba(236, 156, 201, 0.65), transparent 60%),
+             radial-gradient(50% 60% at 85% 95%, rgba(244, 165, 132, 0.45), transparent 65%),
+             linear-gradient(180deg, #E8D8FF, #FCEFF4);
+
+  /* ── Brand CTA Gradient (pink → violet → blue) ────────────────── */
+  --brand-cta: linear-gradient(135deg, #FF6FB5 0%, #B07CF7 50%, #5C7CFA 100%);
+}
+
+/* ── Typography Classes ───────────────────────────────────────── */
+/* Headings use SUSE Mono */
+.t-display-xl { font: var(--fw-display) var(--fs-display-xl)/var(--lh-display-xl) var(--font-header); letter-spacing: var(--ls-display-xl); }
+.t-display-l  { font: var(--fw-display) var(--fs-display-l)/var(--lh-display-l)   var(--font-header); letter-spacing: var(--ls-display-l); }
+.t-display-m  { font: var(--fw-bold)    var(--fs-display-m)/var(--lh-display-m)   var(--font-header); letter-spacing: var(--ls-display-m); }
+
+.t-h1 { font: var(--fw-bold) var(--fs-h1)/var(--lh-h1) var(--font-header); letter-spacing: var(--ls-h1); }
+.t-h2 { font: var(--fw-bold) var(--fs-h2)/var(--lh-h2) var(--font-header); letter-spacing: var(--ls-h2); }
+.t-h3 { font: var(--fw-semibold) var(--fs-h3)/var(--lh-h3) var(--font-header); letter-spacing: var(--ls-h3); }
+.t-h4 { font: var(--fw-semibold) var(--fs-h4)/var(--lh-h4) var(--font-header); letter-spacing: var(--ls-h4); }
+
+/* Body uses SUSE Regular */
+.t-body-lg { font: var(--fw-regular) var(--fs-body-lg)/var(--lh-body-lg) var(--font-body); }
+.t-body    { font: var(--fw-regular) var(--fs-body)/var(--lh-body)       var(--font-body); }
+.t-body-sm { font: var(--fw-regular) var(--fs-body-sm)/var(--lh-body-sm) var(--font-body); }
+.t-caption { font: var(--fw-medium)  var(--fs-caption)/var(--lh-caption) var(--font-body); letter-spacing: 0.01em; }
+.t-code    { font: var(--fw-regular) var(--fs-code)/var(--lh-code)       var(--font-mono); }
+.t-overline{ font: var(--fw-semibold) 11px/1.4 var(--font-body); letter-spacing: 0.12em; text-transform: uppercase; }

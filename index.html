@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>UX Design Workshop · Middle School</title>
+<link rel="stylesheet" href="tokens.css" />
+<style>
+  /* ──────────────────────────────────────────────────────────────
+     Slide-projection scale (1920×1080)
+     TYPE: title 76 / subtitle 44 / body 34 / small 28 / micro 22
+     SPACE: padTop 100 / padBottom 80 / padX 120 / titleGap 52 / itemGap 28
+     ────────────────────────────────────────────────────────────── */
+
+  html, body { margin: 0; padding: 0; background: #0B0D14; }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+
+  deck-stage > section {
+    box-sizing: border-box;
+    overflow: hidden;
+    background: var(--bg-page);
+    color: var(--fg-1);
+  }
+
+  /* ── Reusable surface backgrounds ─────────────────────────────── */
+  .bg-hero   { background: var(--bg-hero); }
+  .bg-aurora { background: var(--bg-aurora); color: var(--fg-on-brand); }
+  .bg-mesh   { background: var(--bg-mesh); }
+  .bg-cream  { background: linear-gradient(180deg, #FCEFE2 0%, #F4D6E1 100%); }
+  .bg-paper  { background: var(--bg-app); }
+  .bg-ink    { background: var(--bg-app-dark); color: var(--fg-on-brand); }
+
+  /* ── Type helpers ─────────────────────────────────────────────── */
+  .mono { font-family: var(--font-header); }
+  .body { font-family: var(--font-body); }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-3);
+  }
+  .eyebrow.on-dark { color: rgba(255,255,255,0.72); }
+
+  .title {
+    font-family: var(--font-header);
+    font-weight: 800;
+    font-size: 76px;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    margin: 0;
+  }
+  .title.huge {
+    font-size: 132px;
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+  }
+  .title.giant {
+    font-size: 220px;
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+  }
+  .subtitle {
+    font-family: var(--font-header);
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--fg-2);
+  }
+  .body-lg {
+    font-family: var(--font-body);
+    font-size: 34px;
+    line-height: 1.45;
+    color: var(--fg-2);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .body-md {
+    font-family: var(--font-body);
+    font-size: 28px;
+    line-height: 1.5;
+    color: var(--fg-2);
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .micro {
+    font-family: var(--font-body);
+    font-size: 24px;
+    line-height: 1.4;
+    color: var(--fg-3);
+    margin: 0;
+  }
+
+  /* ── Slide frame ──────────────────────────────────────────────── */
+  .frame {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 100px 120px 80px 120px;
+    display: flex;
+    flex-direction: column;
+  }
+  .frame.tight { padding: 80px 100px 70px; }
+
+  /* ── Slide chrome (page numbers, footer) ──────────────────────── */
+  .chrome {
+    position: absolute;
+    inset: auto 0 36px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    font-family: var(--font-header);
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    color: var(--fg-3);
+    pointer-events: none;
+  }
+  .chrome.on-dark { color: rgba(255,255,255,0.55); }
+  .chrome .brand { font-weight: 700; }
+
+  /* ── Glass card ───────────────────────────────────────────────── */
+  .glass {
+    background: var(--bg-glass-strong);
+    border: 1px solid var(--stroke-glass);
+    border-radius: var(--r-2xl);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* ── Pills / chips ────────────────────────────────────────────── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-radius: var(--r-pill);
+    background: rgba(255,255,255,0.6);
+    border: 1px solid var(--stroke-glass);
+    font-family: var(--font-header);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--fg-1);
+  }
+  .pill .dot {
+    width: 12px; height: 12px; border-radius: 999px;
+    background: var(--brand-cta);
+  }
+
+  /* ── Decorative orbs ──────────────────────────────────────────── */
+  .orb {
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(60px);
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  /* ── Misc ─────────────────────────────────────────────────────── */
+  .stack { display: flex; flex-direction: column; }
+  .row   { display: flex; flex-direction: row; }
+  .grow  { flex: 1; }
+  .center{ display: flex; align-items: center; justify-content: center; }
+
+  /* checkmark bullets per design system */
+  .check-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 28px; }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    font-family: var(--font-body);
+    font-size: 32px;
+    line-height: 1.4;
+    color: var(--fg-2);
+  }
+  .check-list .mark {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    background: var(--brand-cta);
+    color: white;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    font-family: var(--font-header);
+    font-weight: 800;
+    font-size: 24px;
+    margin-top: 4px;
+  }
+
+  /* ── Slide-specific layout helpers ────────────────────────────── */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
+  }
+  .role-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px;
+    border-radius: var(--r-2xl);
+    background: rgba(255,255,255,0.78);
+    border: 1px solid var(--stroke-glass);
+    box-shadow: var(--shadow-md);
+  }
+  .role-card .portrait {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--r-xl);
+    object-fit: cover;
+    background: #ddd;
+  }
+  .role-card .role-name {
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.015em;
+    color: var(--fg-1);
+    margin: 0;
+  }
+  .role-card .role-tagline {
+    font-family: var(--font-body);
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--fg-3);
+    margin: 0;
+  }
+
+  /* Crazy 8s grid */
+  .ce-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 18px;
+    width: 100%;
+    height: 100%;
+  }
+  .ce-cell {
+    background: white;
+    border: 2px dashed rgba(15,17,21,0.2);
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 56px;
+    color: var(--fg-4);
+    position: relative;
+  }
+  .ce-cell .num {
+    position: absolute;
+    top: 12px; left: 16px;
+    font-size: 24px;
+    color: var(--fg-4);
+  }
+  .ce-cell .sketch {
+    width: 70%;
+    height: 70%;
+    color: var(--fg-2);
+  }
+
+  /* compare cards */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    flex: 1;
+  }
+  .compare .panel {
+    border-radius: var(--r-2xl);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .compare .panel.bad {
+    background: linear-gradient(180deg, #FFE4E4 0%, #FFD1D6 100%);
+    border: 1px solid rgba(229, 72, 77, 0.25);
+  }
+  .compare .panel.good {
+    background: linear-gradient(180deg, #DEF5EA 0%, #C8E5DA 100%);
+    border: 1px solid rgba(45, 182, 124, 0.3);
+  }
+  .compare .label {
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .compare .panel.bad .label { color: #B82430; }
+  .compare .panel.good .label { color: #1A7A4F; }
+
+  /* timeline */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .tstep {
+    display: flex; flex-direction: column;
+    gap: 14px;
+    padding: 28px 24px;
+    border-radius: var(--r-xl);
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--stroke-glass);
+  }
+  .tstep .tnum {
+    font-family: var(--font-header);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1;
+    background: var(--brand-cta);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tstep .tname {
+    font-family: var(--font-header);
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--fg-1);
+    margin: 0;
+  }
+  .tstep .tdesc {
+    font-family: var(--font-body);
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--fg-3);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ───────────────────────── 01 · TITLE ───────────────────────── -->
+  <section data-label="01 Designing the things you tap" class="bg-hero">
+    <!-- decorative iridescent orbs -->
+    <div class="orb" style="width: 620px; height: 620px; top: -180px; right: -120px; background: radial-gradient(circle at 30% 30%, #FFB07A 0%, #FF6FB5 45%, transparent 70%); opacity: 0.55;"></div>
+    <div class="orb" style="width: 520px; height: 520px; bottom: -160px; left: -120px; background: radial-gradient(circle at 70% 30%, #B07CF7 0%, #5C7CFA 50%, transparent 75%); opacity: 0.5;"></div>
+    <div class="orb" style="width: 320px; height: 320px; top: 38%; left: 42%; background: radial-gradient(circle, #FFE4D2 0%, transparent 70%); opacity: 0.6;"></div>
+
+    <div class="frame stack" style="justify-content: space-between; position: relative; z-index: 1;">
+
+      <!-- ── TOP BAR ──────────────────────────────────────────── -->
+      <div class="row" style="justify-content: space-between; align-items: center;">
+        <div class="pill"><span class="dot"></span><span>UX Design Workshop</span></div>
+        <div class="row" style="gap: 14px; align-items: center;">
+          <span class="micro mono" style="letter-spacing: 0.18em;">01 / 27</span>
+          <span style="width: 28px; height: 1px; background: var(--stroke-2);"></span>
+          <span class="micro mono" style="letter-spacing: 0.18em;">45 MIN</span>
+        </div>
+      </div>
+
+      <!-- ── HERO ─────────────────────────────────────────────── -->
+      <div class="row" style="gap: 80px; align-items: flex-end;">
+        <!-- LEFT: oversized numeral + headline -->
+        <div class="stack" style="flex: 1.6; gap: 28px;">
+          <div class="row" style="gap: 28px; align-items: flex-start;">
+            <div class="mono" style="font-size: 132px; line-height: 0.85; font-weight: 800; color: var(--brand-pink); letter-spacing: -0.04em;">01</div>
+            <div class="stack" style="gap: 14px; padding-top: 12px;">
+              <div class="eyebrow" style="letter-spacing: 0.22em;">A workshop in 45 minutes</div>
+              <div class="micro mono" style="color: var(--fg-3); letter-spacing: 0.16em;">FROM APPS · TO AI · TO YOU</div>
+            </div>
+          </div>
+
+          <h1 class="title huge" style="font-size: 156px; line-height: 0.9; margin: 0; letter-spacing: -0.03em;">
+            Designing<br/>
+            <span style="font-style: italic; font-weight: 500;">how things</span><br/>
+            <span style="background: linear-gradient(95deg, #FF6FB5 0%, #B07CF7 50%, #5C7CFA 100%); -webkit-background-clip: text; background-clip: text; color: transparent;">work.</span>
+          </h1>
+        </div>
+
+        <!-- RIGHT: glass intro card -->
+        <div class="glass" style="flex: 1; padding: 44px; display: flex; flex-direction: column; gap: 24px; max-width: 540px;">
+          <div class="row" style="gap: 12px; align-items: center;">
+            <div style="width: 10px; height: 10px; border-radius: 999px; background: var(--brand-pink); box-shadow: 0 0 0 4px rgba(255, 111, 181, 0.18);"></div>
+            <div class="micro mono" style="letter-spacing: 0.18em; color: var(--fg-2);">TODAY YOU'LL...</div>
+          </div>
+          <p class="body-lg" style="font-size: 28px; line-height: 1.45; color: var(--fg-1); margin: 0;">
+            Pick a problem that bugs you. Sketch <span class="mono" style="font-weight: 700; color: var(--brand-violet);">8 solutions</span> in 8 minutes. Get feedback. Share with the room.
+          </p>
+          <div style="height: 1px; background: var(--stroke-2);"></div>
+          <p class="micro mono" style="color: var(--fg-3); margin: 0; line-height: 1.5;">
+            That's the actual job. No code required.
+          </p>
+        </div>
+      </div>
+
+      <!-- ── METADATA FOOTER ──────────────────────────────────── -->
+      <div class="row" style="gap: 0; align-items: stretch; border-top: 1px solid var(--stroke-2); padding-top: 28px;">
+        <div class="stack" style="flex: 1; gap: 8px; padding-right: 32px; border-right: 1px dashed var(--stroke-2);">
+          <div class="micro mono" style="color: var(--fg-3); letter-spacing: 0.16em;">PRESENTER</div>
+          <div class="body-md mono" style="color: var(--fg-1); font-weight: 700; font-size: 22px;">Amber Miro Heinbockel</div>
+          <div class="micro" style="color: var(--fg-3);">UX Lead · Google</div>
+        </div>
+        <div class="stack" style="flex: 1; gap: 8px; padding: 0 32px; border-right: 1px dashed var(--stroke-2);">
+          <div class="micro mono" style="color: var(--fg-3); letter-spacing: 0.16em;">SUBJECT</div>
+          <div class="body-md mono" style="color: var(--fg-1); font-weight: 700; font-size: 22px;">UX Design 101</div>
+          <div class="micro" style="color: var(--fg-3);">For curious students</div>
+        </div>
+        <div class="stack" style="flex: 1; gap: 8px; padding-left: 32px;">
+          <div class="micro mono" style="color: var(--fg-3); letter-spacing: 0.16em;">FORMAT</div>
+          <div class="body-md mono" style="color: var(--fg-1); font-weight: 700; font-size: 22px;">Talk + Crazy Eights</div>
+          <div class="micro" style="color: var(--fg-3);">Stand up, sketch, share</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── 02 · AGENDA ─────────────────────── -->
+  <section data-label="02 Today's plan" class="bg-paper">
+    <div class="frame stack" style="gap: 60px;">
+      <div class="stack" style="gap: 20px;">
+        <div class="eyebrow">Agenda</div>
+        <h2 class="title">Today's plan</h2>
+      </div>
+
+      <div class="stack grow" style="gap: 24px;">
+        <div class="row" style="gap: 32px; align-items: center;">
+          <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-blue); width: 140px;">5 min</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">01 — 04</div>
+          <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;">Hello — who I am, and what a tech job <em>actually</em> looks like</div>
+        </div>
+        <div style="height:1px; background: var(--stroke-2);"></div>
+
+        <div class="row" style="gap: 32px; align-items: center;">
+          <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-violet); width: 140px;">8 min</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">05 — 07</div>
+          <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;">What UX is — good vs. bad design, plus the AI twist</div>
+        </div>
+        <div style="height:1px; background: var(--stroke-2);"></div>
+
+        <div class="row" style="gap: 32px; align-items: center;">
+          <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-pink); width: 140px;">7 min</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">08 — 13</div>
+          <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;"><span class="mono" style="font-weight: 700;">Stand up</span> — walk to a wall, where does the room land?</div>
+        </div>
+        <div style="height:1px; background: var(--stroke-2);"></div>
+
+        <div class="row" style="gap: 32px; align-items: center;">
+          <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-peach); width: 140px;">5 min</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">14 — 18</div>
+          <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;">The designer's mindset — pick a problem worth solving</div>
+        </div>
+        <div style="height:1px; background: var(--stroke-2);"></div>
+
+        <div class="row" style="gap: 32px; align-items: center;">
+          <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-blue-deep); width: 140px;">20 min</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">19 — 25</div>
+          <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;"><span class="mono" style="font-weight: 700;">Crazy Eights</span> — sketch 8 ideas, crit with a partner, refine, share</div>
+        </div>
+        <div style="height:1px; background: var(--stroke-2);"></div>
+
+        <div class="row" style="gap: 32px; align-items: center;">
+          <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-violet); width: 140px;">5 min</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">26 — 28</div>
+          <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;">Debrief — what you just did, and what to try next</div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>02 · Agenda</span></div>
+  </section>
+
+  <!-- ───────────────────────── 03 · TECH IS MORE THAN CODE ─────── -->
+  <!-- ───────────────────────── 03 · HI I'M AMBER ─────────────── -->
+  <section data-label="03 Hi I'm Amber" class="bg-aurora">
+    <div class="frame" style="padding: 0; position: relative;">
+      <div class="row" style="width: 100%; height: 100%; align-items: stretch;">
+        <!-- LEFT: text -->
+        <div class="stack" style="flex: 1.05; padding: 100px 80px 80px 120px; justify-content: center; gap: 36px; color: white;">
+          <div class="eyebrow on-dark">Hello · your designer for today</div>
+          <h2 class="title huge" style="color: white;">Hi, I'm<br/>Amber.</h2>
+
+          <ul class="check-list" style="gap: 22px; margin-top: 8px;">
+            <li style="color: rgba(255,255,255,0.95);">
+              <span class="mark" style="background: rgba(255,255,255,0.22); color: white; backdrop-filter: blur(10px);">✓</span>
+              <span style="font-size: 30px;">I lead a <span class="mono" style="font-weight: 700;">UX team at Google</span> — and I've spent my whole career in design.</span>
+            </li>
+            <li style="color: rgba(255,255,255,0.95);">
+              <span class="mark" style="background: rgba(255,255,255,0.22); color: white; backdrop-filter: blur(10px);">✓</span>
+              <span style="font-size: 30px;">Outside of work I <span class="mono" style="font-weight: 700;">paint</span>, I'm <span class="mono" style="font-weight: 700;">writing a novel</span>, and I make music as <span class="mono" style="font-weight: 700;">Ada Fen</span>.</span>
+            </li>
+            <li style="color: rgba(255,255,255,0.95);">
+              <span class="mark" style="background: rgba(255,255,255,0.22); color: white; backdrop-filter: blur(10px);">✓</span>
+              <span style="font-size: 30px;">I don't write code. I <span class="mono" style="font-weight: 700;">solve problems for people</span> — that's the whole job.</span>
+            </li>
+          </ul>
+
+          <div class="glass" style="padding: 28px 32px; margin-top: 12px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);">
+            <p class="body-md" style="color: white; font-size: 28px; line-height: 1.45;">
+              If you can <span class="mono" style="font-weight: 700;">draw</span>, <span class="mono" style="font-weight: 700;">make music</span>, or just <span class="mono" style="font-weight: 700;">know when an app feels broken</span> — you already have what it takes to be a designer.
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT: photo on gradient -->
+        <div id="amber-photo-pane" style="flex: 0.85; position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: center;">
+          <!-- soft mesh gradient backdrop behind the figure -->
+          <div style="position: absolute; inset: 0; background:
+              radial-gradient(60% 60% at 30% 30%, rgba(255,176,122,0.65), transparent 60%),
+              radial-gradient(60% 60% at 75% 70%, rgba(236,156,201,0.7), transparent 60%),
+              radial-gradient(80% 80% at 50% 100%, rgba(122,168,255,0.55), transparent 65%);"></div>
+          <!-- glass disc behind portrait for depth -->
+          <div id="amber-disc" style="position: absolute; width: 620px; height: 620px; border-radius: 999px;
+              background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.05) 70%, transparent 100%);
+              top: 50%; left: 50%; transform: translate(-50%, -45%); filter: blur(2px);"></div>
+          <img id="amber-photo" src="assets/amber.png" alt="Amber, smiling, holding a laptop"
+               style="position: relative; max-width: 92%; max-height: 96%; object-fit: contain; z-index: 1;" />
+        </div>
+      </div>
+    </div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>03 · About me</span></div>
+  </section>
+
+  <!-- ───────────────────────── 04 · TECH IS MORE THAN CODE ─── -->
+  <section data-label="04 Tech is more than code" class="bg-mesh">
+    <div class="frame stack" style="justify-content: center; gap: 48px;">
+      <div class="eyebrow">A common myth</div>
+      <h2 class="title huge" style="max-width: 1500px;">"Tech jobs"<br/>≠ "writing code."</h2>
+      <p class="body-lg" style="max-width: 1300px;">
+        Engineers build the machine. But before a single line of code, dozens of other
+        people decide <span class="mono" style="font-weight: 700;">what to build</span>,
+        <span class="mono" style="font-weight: 700;">who it's for</span>, and
+        <span class="mono" style="font-weight: 700;">how it should feel</span>.
+      </p>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>04 · The myth</span></div>
+  </section>
+
+  <!-- ───────────────────────── 05 · WHAT IS UX ─────────────────── -->
+  <section data-label="05 So what is UX?" class="bg-cream">
+    <div class="frame stack" style="gap: 40px;">
+      <div class="stack" style="gap: 16px;">
+        <div class="eyebrow">User experience design</div>
+        <h2 class="title">So what is UX?</h2>
+      </div>
+
+      <!-- Device showcase strip — fills the middle, gives the abstract topic real things to look at -->
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 24px 12px 20px; border-top: 1px dashed var(--stroke-2); border-bottom: 1px dashed var(--stroke-2); position: relative;">
+        <div class="mono" style="position: absolute; top: -14px; left: 24px; background: var(--bg-1); padding: 0 14px; font-size: 16px; font-weight: 800; letter-spacing: 0.14em; color: var(--fg-3);">EVERY DIGITAL THING NEEDS A UX DESIGNER</div>
+
+        <!-- Phone -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 1;">
+          <svg width="120" height="220" viewBox="0 0 120 220" fill="none" aria-hidden="true">
+            <rect x="10" y="6" width="100" height="208" rx="20" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <rect x="18" y="22" width="84" height="160" rx="6" fill="#5C7CFA"/>
+            <rect x="26" y="32" width="68" height="10" rx="2" fill="#FFFFFF" opacity="0.85"/>
+            <rect x="26" y="50" width="50" height="6" rx="2" fill="#FFFFFF" opacity="0.55"/>
+            <rect x="26" y="76" width="68" height="50" rx="6" fill="#FFFFFF" opacity="0.18"/>
+            <circle cx="40" cy="100" r="10" fill="#FFFFFF" opacity="0.45"/>
+            <rect x="56" y="92" width="34" height="6" rx="2" fill="#FFFFFF" opacity="0.7"/>
+            <rect x="56" y="104" width="22" height="5" rx="2" fill="#FFFFFF" opacity="0.5"/>
+            <rect x="26" y="138" width="68" height="36" rx="6" fill="#FFFFFF" opacity="0.18"/>
+            <circle cx="40" cy="156" r="8" fill="#FF6FB5"/>
+            <rect x="56" y="150" width="34" height="6" rx="2" fill="#FFFFFF" opacity="0.7"/>
+            <rect x="56" y="162" width="20" height="5" rx="2" fill="#FFFFFF" opacity="0.5"/>
+            <rect x="50" y="194" width="20" height="3" rx="1.5" fill="#1A1A1F"/>
+            <rect x="50" y="14" width="20" height="3" rx="1.5" fill="#1A1A1F"/>
+          </svg>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--fg-2); letter-spacing: 0.06em;">PHONES</div>
+        </div>
+
+        <!-- Tablet -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 1;">
+          <svg width="170" height="220" viewBox="0 0 170 220" fill="none" aria-hidden="true">
+            <rect x="6" y="20" width="158" height="180" rx="14" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <rect x="16" y="32" width="138" height="156" rx="6" fill="#FFB07A"/>
+            <rect x="26" y="42" width="80" height="12" rx="3" fill="#FFFFFF" opacity="0.92"/>
+            <rect x="26" y="62" width="50" height="6" rx="2" fill="#FFFFFF" opacity="0.55"/>
+            <rect x="26" y="82" width="58" height="44" rx="6" fill="#FFFFFF" opacity="0.85"/>
+            <rect x="92" y="82" width="52" height="44" rx="6" fill="#FFFFFF" opacity="0.55"/>
+            <rect x="26" y="134" width="118" height="44" rx="6" fill="#FFFFFF" opacity="0.7"/>
+            <circle cx="85" cy="194" r="3" fill="none" stroke="#1A1A1F" stroke-width="1.5"/>
+          </svg>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--fg-2); letter-spacing: 0.06em;">TABLETS</div>
+        </div>
+
+        <!-- Laptop -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 1.15;">
+          <svg width="220" height="220" viewBox="0 0 220 180" fill="none" aria-hidden="true">
+            <!-- screen -->
+            <rect x="20" y="8" width="180" height="124" rx="6" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <rect x="28" y="16" width="164" height="108" rx="3" fill="#B07CF7"/>
+            <!-- toolbar -->
+            <rect x="28" y="16" width="164" height="14" fill="#FFFFFF" opacity="0.25"/>
+            <circle cx="36" cy="23" r="2.5" fill="#FFFFFF" opacity="0.75"/>
+            <circle cx="44" cy="23" r="2.5" fill="#FFFFFF" opacity="0.75"/>
+            <circle cx="52" cy="23" r="2.5" fill="#FFFFFF" opacity="0.75"/>
+            <!-- content -->
+            <rect x="38" y="40" width="80" height="10" rx="3" fill="#FFFFFF" opacity="0.92"/>
+            <rect x="38" y="58" width="50" height="5" rx="2" fill="#FFFFFF" opacity="0.55"/>
+            <rect x="38" y="70" width="64" height="5" rx="2" fill="#FFFFFF" opacity="0.45"/>
+            <rect x="130" y="40" width="52" height="68" rx="5" fill="#FFFFFF" opacity="0.85"/>
+            <rect x="38" y="86" width="60" height="22" rx="5" fill="#FF6FB5"/>
+            <!-- base -->
+            <rect x="6" y="132" width="208" height="12" rx="3" fill="#1A1A1F"/>
+            <rect x="92" y="132" width="36" height="6" fill="#33333A"/>
+          </svg>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--fg-2); letter-spacing: 0.06em;">LAPTOPS</div>
+        </div>
+
+        <!-- Watch -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0.85;">
+          <svg width="140" height="220" viewBox="0 0 140 220" fill="none" aria-hidden="true">
+            <rect x="44" y="14" width="52" height="32" rx="8" fill="#1A1A1F"/>
+            <rect x="44" y="174" width="52" height="32" rx="8" fill="#1A1A1F"/>
+            <rect x="22" y="46" width="96" height="128" rx="22" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <rect x="32" y="58" width="76" height="104" rx="14" fill="#FF6FB5"/>
+            <rect x="40" y="68" width="60" height="10" rx="3" fill="#FFFFFF" opacity="0.95"/>
+            <rect x="40" y="84" width="40" height="6" rx="2" fill="#FFFFFF" opacity="0.6"/>
+            <circle cx="70" cy="124" r="20" fill="#FFFFFF" opacity="0.18"/>
+            <text x="70" y="131" text-anchor="middle" font-family="monospace" font-size="18" font-weight="800" fill="#FFFFFF">10:42</text>
+            <rect x="116" y="100" width="6" height="20" rx="2" fill="#1A1A1F"/>
+          </svg>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--fg-2); letter-spacing: 0.06em;">WATCHES</div>
+        </div>
+
+        <!-- Camera -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0.95;">
+          <svg width="180" height="220" viewBox="0 0 180 160" fill="none" aria-hidden="true">
+            <!-- top hump -->
+            <rect x="60" y="20" width="60" height="22" rx="4" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <!-- body -->
+            <rect x="14" y="40" width="152" height="100" rx="10" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <!-- grip -->
+            <rect x="14" y="40" width="34" height="100" rx="10" fill="#1A1A1F" opacity="0.08"/>
+            <!-- lens -->
+            <circle cx="100" cy="92" r="40" fill="#FFB07A" stroke="#1A1A1F" stroke-width="3"/>
+            <circle cx="100" cy="92" r="28" fill="#1A1A1F"/>
+            <circle cx="100" cy="92" r="18" fill="#33333A"/>
+            <circle cx="92" cy="84" r="6" fill="#FFFFFF" opacity="0.45"/>
+            <!-- flash + screen -->
+            <circle cx="148" cy="62" r="4" fill="#FF6FB5"/>
+            <rect x="20" y="50" width="22" height="12" rx="2" fill="#1A1A1F"/>
+          </svg>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--fg-2); letter-spacing: 0.06em;">CAMERAS</div>
+        </div>
+
+        <!-- Smart speaker / voice -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0.7;">
+          <svg width="120" height="220" viewBox="0 0 120 220" fill="none" aria-hidden="true">
+            <rect x="20" y="20" width="80" height="180" rx="38" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="3"/>
+            <ellipse cx="60" cy="60" rx="26" ry="6" fill="#5C7CFA" opacity="0.85"/>
+            <ellipse cx="60" cy="78" rx="32" ry="6" fill="#5C7CFA" opacity="0.55"/>
+            <ellipse cx="60" cy="96" rx="26" ry="6" fill="#5C7CFA" opacity="0.85"/>
+            <ellipse cx="60" cy="114" rx="20" ry="6" fill="#5C7CFA" opacity="0.55"/>
+            <circle cx="60" cy="160" r="20" fill="none" stroke="#1A1A1F" stroke-width="2.5"/>
+            <circle cx="60" cy="160" r="8" fill="#FF6FB5"/>
+            <circle cx="46" cy="184" r="2.5" fill="#1A1A1F"/>
+            <circle cx="74" cy="184" r="2.5" fill="#1A1A1F"/>
+          </svg>
+          <div class="mono" style="font-size: 16px; font-weight: 700; color: var(--fg-2); letter-spacing: 0.06em;">VOICE</div>
+        </div>
+      </div>
+
+      <div class="row" style="gap: 60px; align-items: center;">
+        <div class="stack" style="gap: 22px; flex: 1.1;">
+          <p class="body-lg">
+            <span class="mono" style="font-weight: 700;">UX</span> stands for
+            <span class="mono" style="font-weight: 700;">user experience.</span>
+          </p>
+          <p class="body-lg">
+            A UX designer's job is to make sure that when you pick up an app,
+            it <em>just makes sense</em> — you know where to tap, you find what you need,
+            and you don't get lost or annoyed.
+          </p>
+          <p class="body-lg">
+            They design the <span class="mono" style="font-weight: 700;">path</span>,
+            not just the picture.
+          </p>
+        </div>
+
+        <div class="glass" style="flex: 0.9; padding: 36px; display: flex; flex-direction: column; gap: 18px;">
+          <div class="eyebrow">Quick definition</div>
+          <p class="title" style="font-size: 48px; line-height: 1.1;">
+            "How it feels to use this thing."
+          </p>
+          <p class="micro">— every UX designer, basically</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>05 · Definition</span></div>
+  </section>
+
+  <!-- ───────────────────────── 06 · AI: WHAT IS IT, REALLY? ──── -->
+  <section data-label="06 AI is a fast intern" class="bg-cream">
+    <div class="frame stack" style="gap: 40px;">
+      <div class="stack" style="gap: 16px;">
+        <div class="eyebrow">A big part of UX today</div>
+        <h2 class="title huge" style="max-width: 1700px;">AI isn't a robot<br/>that knows everything.</h2>
+      </div>
+
+      <div class="row" style="gap: 32px; align-items: stretch; margin-top: 8px;">
+        <div class="glass" style="flex: 1.1; padding: 36px; display: flex; flex-direction: column; gap: 14px;">
+          <div class="mono" style="font-size: 24px; font-weight: 800; color: var(--brand-blue-deep); letter-spacing: 0.05em;">THINK OF IT LIKE…</div>
+          <p class="body-lg" style="font-weight: 700; color: var(--fg-1); line-height: 1.25;">A really fast,<br/>really powerful intern.</p>
+          <p class="body-md" style="color: var(--fg-2);">Great at following patterns. Doesn't actually <em>know</em> anything until somebody teaches it — that somebody is a designer.</p>
+        </div>
+
+        <div style="flex: 1.6; display: flex; flex-direction: column; gap: 16px;">
+          <div class="eyebrow">Designing for AI = three jobs</div>
+          <ul class="check-list">
+            <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">Guardrails</span> — AI says weird or wrong things. Designers build the safety nets.</span></li>
+            <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">Personality</span> — serious professor, or chill friend? That's a design choice.</span></li>
+            <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">Intent</span> — AI has to guess what you actually want. Designers help it read the room.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="glass" style="padding: 28px 36px; background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
+        <p class="body-md" style="color: var(--fg-1);">At Google we call this <span class="mono" style="font-weight: 800; color: var(--brand-blue-deep);">Agentic UX</span> — the tech does the work for you, so you spend more time being creative and less time clicking buttons.</p>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>06 · AI, really</span></div>
+  </section>
+
+  <!-- ───────────────────────── 07 · GOOD VS BAD ────────────────── -->
+  <section data-label="07 Good UX vs bad UX" class="bg-paper">
+    <div class="frame stack" style="gap: 40px;">
+      <div class="stack" style="gap: 16px;">
+        <div class="eyebrow">You already know the difference</div>
+        <h2 class="title"></h2>
+      </div>
+
+      <div class="compare">
+        <div class="panel bad">
+          <div class="label">Bad UX</div>
+          <p class="title" style="font-size: 48px; line-height: 1.1;">A door that says PUSH but you have to pull.</p>
+          <p class="body-md" style="color: var(--fg-2);">
+            Doors with flat handles. Apps that hide the back button. Forms that make you start over because of one typo.
+          </p>
+          <p class="body-md mono" style="color: #B82430; font-weight: 700; margin-top: auto;">
+            Makes you feel dumb. (You're not.)
+          </p>
+        </div>
+        <div class="panel good">
+          <div class="label">Good UX</div>
+          <p class="title" style="font-size: 48px; line-height: 1.1;">A door with a handle that says "pull me."</p>
+          <p class="body-md" style="color: var(--fg-2);">
+            Snapchat opens straight to the camera. The volume button does what you expect. Undo exists.
+          </p>
+          <p class="body-md mono" style="color: #1A7A4F; font-weight: 700; margin-top: auto;">
+            You don't even notice it. That's the goal.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>07 · Examples</span></div>
+  </section>
+
+  <!-- ───────────────────────── 07 · ROOM SPECTRUM (interactive) ── -->
+  <!-- ───────────────────────── 07 · SPECTRUM INTRO ─────────────── -->
+  <section data-label="08 The room spectrum" class="bg-paper">
+    <div class="frame stack" style="gap: 40px; justify-content: center;">
+      <div class="row" style="gap: 16px; align-items: center;">
+        <div class="pill" style="background: var(--brand-cta); color: white; border: none;">
+          <span style="width:10px; height:10px; border-radius:999px; background:white;"></span>
+          <span>Stand up · 4 minutes</span>
+        </div>
+      </div>
+      <div class="stack" style="gap: 16px;">
+        <div class="eyebrow">Activity 1 · Move your body</div>
+        <h2 class="title huge" style="font-size: 96px;">The room spectrum.</h2>
+      </div>
+
+      <div class="row" style="gap: 24px; align-items: stretch; margin-top: 8px;">
+        <div class="glass" style="padding: 36px 40px; display:flex; flex-direction:column; gap:8px; min-width: 320px;">
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: #B82430;">← LEFT WALL</div>
+          <div class="title" style="font-size: 56px;">I hate it.</div>
+        </div>
+        <div class="grow center" style="min-height: 80px;">
+          <div style="width:100%; height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
+        </div>
+        <div class="glass" style="padding: 36px 40px; display:flex; flex-direction:column; gap:8px; min-width: 320px; align-items:flex-end; text-align:right;">
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: #1A7A4F;">RIGHT WALL →</div>
+          <div class="title" style="font-size: 56px;">I love it.</div>
+        </div>
+      </div>
+
+      <p class="body-lg" style="color: var(--fg-2); margin-top: 16px;">I'll ask <span class="mono" style="font-weight: 800; color: var(--fg-1);">four questions</span>. After each one, walk to where you actually feel — left, right, anywhere in the middle. No talking, just move.</p>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>08 · Spectrum</span></div>
+  </section>
+
+  <!-- ───────────────────────── 08 · SPECTRUM Q1 ──────────────────── -->
+  <section data-label="09 Spectrum Q1 - feed" class="bg-paper">
+    <div class="frame stack" style="justify-content: center; gap: 40px;">
+      <div class="row" style="gap: 24px; align-items: center;">
+        <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-blue-deep);">QUESTION 01</div>
+        <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
+      </div>
+      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">How TikTok &amp; YouTube<br/>pick the next video<br/>for you.</h2>
+      <div class="row" style="gap: 24px; align-items: center; margin-top: 24px;">
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #B82430; min-width: 200px;">← HATE IT</div>
+        <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 200px; text-align: right;">LOVE IT →</div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>09 · Spectrum 01</span></div>
+  </section>
+
+  <!-- ───────────────────────── 09 · SPECTRUM Q2 ──────────────────── -->
+  <section data-label="10 Spectrum Q2 - terms" class="bg-paper">
+    <div class="frame stack" style="justify-content: center; gap: 40px;">
+      <div class="row" style="gap: 24px; align-items: center;">
+        <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-violet);">QUESTION 02</div>
+        <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
+      </div>
+      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">Talking to an AI<br/>like it's a person.</h2>
+      <p class="body-md" style="color: var(--fg-2); max-width: 1500px; font-size: 26px; margin-top: -12px;">Giving it a name, asking it for advice, or just venting to it.</p>
+      <div class="row" style="gap: 24px; align-items: center; margin-top: 16px;">
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #B82430; min-width: 320px;">← WEIRD · I'd rather a human</div>
+        <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 320px; text-align: right;">HELPFUL · easy to talk to →</div>
+      </div>
+      <div class="glass" style="padding: 22px 28px; margin-top: 12px;">
+        <p class="body-md" style="color: var(--fg-1); font-size: 22px;"><span class="mono" style="font-weight: 700; color: var(--brand-violet);">PERSONALITY DESIGN ·</span> Someone had to decide whether that AI sounds like a robot or a friend.</p>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>10 · Spectrum 02</span></div>
+  </section>
+
+  <!-- ───────────────────────── 10 · SPECTRUM Q3 ──────────────────── -->
+  <section data-label="11 Spectrum Q3 - notifications" class="bg-paper">
+    <div class="frame stack" style="justify-content: center; gap: 40px;">
+      <div class="row" style="gap: 24px; align-items: center;">
+        <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-peach);">QUESTION 03</div>
+        <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
+      </div>
+      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">The notifications<br/>your phone sends you<br/>every day.</h2>
+      <div class="row" style="gap: 24px; align-items: center; margin-top: 24px;">
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #B82430; min-width: 200px;">← HATE IT</div>
+        <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 200px; text-align: right;">LOVE IT →</div>
+      </div>
+      <p class="body-md" style="color: var(--fg-3); margin-top: 8px; font-size: 24px;">To anyone in the middle: <span class="mono" style="font-weight: 700; color: var(--fg-1);">“What would push you right?”</span> — that answer is the design goal.</p>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>11 · Spectrum 03</span></div>
+  </section>
+
+  <!-- ───────────────────────── 11 · SPECTRUM Q4 · AI ─────────────── -->
+  <section data-label="12 Spectrum Q4 - AI" class="bg-cream">
+    <div class="frame stack" style="justify-content: center; gap: 40px;">
+      <div class="row" style="gap: 24px; align-items: center;">
+        <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-cta);">QUESTION 04 · AI</div>
+        <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
+      </div>
+      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">Is AI going to make<br/>your life easier — or<br/>more confusing?</h2>
+      <div class="row" style="gap: 24px; align-items: center; margin-top: 16px;">
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-cta); min-width: 240px;">← EASIER</div>
+        <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #FF6FB5 0%, #B07CF7 50%, #5C7CFA 100%);"></div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-blue-deep); min-width: 240px; text-align: right;">MORE CONFUSING →</div>
+      </div>
+      <div class="glass" style="padding: 24px 32px; margin-top: 16px;">
+        <p class="body-md" style="color: var(--fg-1); font-size: 24px;">Pick someone on either side: <span class="mono" style="font-weight: 700;">“If you were the boss of an AI today, what's the first chore you'd give it?”</span></p>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>12 · Spectrum 04</span></div>
+  </section>
+  <!-- ───────────────────────── 13 · TAKE A STAND · AI ──────────── -->
+  <section data-label="13 Take a stand - AI" class="bg-paper">
+    <div class="frame stack" style="justify-content: center; gap: 36px;">
+      <div class="row" style="gap: 24px; align-items: center;">
+        <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-cta);">TAKE A STAND · AI</div>
+        <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
+        <div class="mono" style="font-size: 22px; font-weight: 700; color: var(--fg-3);">A bit more serious</div>
+      </div>
+
+      <h2 class="title huge" style="max-width: 1700px;">How do you<br/>actually feel<br/>about AI?</h2>
+
+      <div class="row" style="gap: 24px; align-items: stretch; margin-top: 12px;">
+        <!-- LEFT WALL -->
+        <div class="glass" style="flex: 1; padding: 28px 28px; border: 2px solid var(--brand-pink); background: rgba(255,111,181,0.10);">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-pink); margin-bottom: 12px;">← LEFT WALL</div>
+          <p class="body-md" style="font-size: 24px; line-height: 1.4;"><span class="mono" style="font-weight: 700;">Best tool ever.</span> It'll do my chores, help me create, solve big problems.</p>
+        </div>
+        <!-- MIDDLE -->
+        <div class="glass" style="flex: 1; padding: 28px 28px; border: 2px solid var(--stroke-2);">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--fg-3); margin-bottom: 12px; text-align: center;">↕ MIDDLE</div>
+          <p class="body-md" style="font-size: 24px; line-height: 1.4; text-align: center;"><span class="mono" style="font-weight: 700;">Confused.</span> Honestly? Feels overhyped.</p>
+        </div>
+        <!-- RIGHT WALL -->
+        <div class="glass" style="flex: 1; padding: 28px 28px; border: 2px solid var(--brand-blue-deep); background: rgba(92,124,250,0.10);">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-blue-deep); margin-bottom: 12px; text-align: right;">RIGHT WALL →</div>
+          <p class="body-md" style="font-size: 24px; line-height: 1.4; text-align: right;"><span class="mono" style="font-weight: 700;">Kinda scary.</span> Taking over, creepy, can't tell what's real.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>13 · Take a stand</span></div>
+  </section>
+
+
+
+  <!-- ───────────────────────── 08 · DESIGNER'S QUESTION ────────── -->
+  <section data-label="14 The designer's question" class="bg-aurora">
+    <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 48px;">
+      <div class="eyebrow on-dark">If a UX designer could only ask one thing</div>
+      <h2 class="title huge" style="color: white; max-width: 1500px;">
+        "Who is this for,<br/>and what are they<br/>trying to do?"
+      </h2>
+      <p class="body-lg" style="color: rgba(255,255,255,0.85); max-width: 1100px;">
+        Every screen, every button, every word — answers some version of those two questions.
+      </p>
+    </div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>14 · The question</span></div>
+  </section>
+
+  <!-- ───────────────────────── 09 · PROCESS ────────────────────── -->
+  <section data-label="15 From problem to product" class="bg-paper">
+    <div class="frame stack" style="gap: 40px; position: relative;">
+      <!-- decorative orb -->
+      <div class="orb" style="width: 520px; height: 520px; background: var(--brand-pink); top: -180px; right: -120px; opacity: 0.35;"></div>
+
+      <div class="row" style="align-items: flex-end; gap: 32px;">
+        <div class="stack" style="gap: 14px; flex: 1;">
+          <div class="eyebrow">The simple version</div>
+          <h2 class="title" style="font-size: 96px;">From problem<br/>to product.</h2>
+        </div>
+        <div class="glass" style="padding: 18px 24px; align-self: center;">
+          <div class="mono" style="font-size: 18px; font-weight: 800; color: var(--brand-cta); letter-spacing: 0.08em;">YOU ARE HERE →</div>
+          <div class="mono" style="font-size: 22px; font-weight: 700; color: var(--fg-1); margin-top: 4px;">Step 02 · Imagine</div>
+        </div>
+      </div>
+
+      <!-- staircase of steps -->
+      <div style="position: relative; padding: 12px 0 24px;">
+        <div class="row" style="gap: 20px; align-items: stretch;">
+
+          <!-- 01 -->
+          <div style="flex: 1; padding: 32px 28px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 64px; font-weight: 800; color: var(--brand-blue-deep); line-height: 1;">01</div>
+            <h3 style="font-size: 36px; font-weight: 700; margin: 0; color: var(--fg-1);">Notice</h3>
+            <p style="font-size: 22px; line-height: 1.4; color: var(--fg-2); margin: 0;">Find a real problem people actually have. Watch them. Ask them.</p>
+          </div>
+
+          <!-- 02 — elevated, bold gradient -->
+          <div style="flex: 1.15; padding: 36px 32px; background: linear-gradient(135deg, #FF8A3D 0%, #FF6FB5 35%, #B07CF7 70%, #5C7CFA 100%); border-radius: 22px; box-shadow: 0 28px 56px rgba(176,124,247,0.45), 0 0 0 1px rgba(255,255,255,0.2) inset; display: flex; flex-direction: column; gap: 14px; color: white; position: relative; transform: scale(1.04); z-index: 2;">
+            <div style="display: inline-flex; align-self: flex-start; background: rgba(0,0,0,0.85); color: white; padding: 6px 14px; border-radius: 999px; font-size: 14px; font-weight: 800; letter-spacing: 0.12em;" class="mono">TODAY · YOU ARE HERE</div>
+            <div class="mono" style="font-size: 72px; font-weight: 800; color: white; line-height: 1;">02</div>
+            <h3 style="font-size: 40px; font-weight: 700; margin: 0; color: white;">Imagine</h3>
+            <p style="font-size: 22px; line-height: 1.4; color: rgba(255,255,255,0.96); margin: 0;">Sketch lots of ideas — fast, messy, no judging. <span class="mono" style="font-weight: 700;">Quantity over polish.</span></p>
+          </div>
+
+          <!-- 03 -->
+          <div style="flex: 1; padding: 32px 28px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 64px; font-weight: 800; color: var(--brand-violet); line-height: 1;">03</div>
+            <h3 style="font-size: 36px; font-weight: 700; margin: 0; color: var(--fg-1);">Try</h3>
+            <p style="font-size: 22px; line-height: 1.4; color: var(--fg-2); margin: 0;">Pick the best ones. Make a clickable mockup. Hand it to a real person.</p>
+          </div>
+
+          <!-- 04 -->
+          <div style="flex: 1; padding: 32px 28px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; flex-direction: column; gap: 14px;">
+            <div class="mono" style="font-size: 64px; font-weight: 800; color: var(--brand-peach); line-height: 1;">04</div>
+            <h3 style="font-size: 36px; font-weight: 700; margin: 0; color: var(--fg-1);">Fix</h3>
+            <p style="font-size: 22px; line-height: 1.4; color: var(--fg-2); margin: 0;">Watch where they get stuck. Change it. Try again. <span class="mono" style="font-weight: 700;">Forever.</span></p>
+          </div>
+        </div>
+
+        <!-- loop arrow back from 04 to 01 -->
+        <div style="display: flex; justify-content: center; margin-top: 48px;">
+          <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--fg-3); letter-spacing: 0.1em; display: flex; align-items: center; gap: 12px;">
+            <span style="width: 60px; height: 1px; background: var(--stroke-2);"></span>
+            ↻ THE LOOP NEVER ENDS · GREAT PRODUCTS REPEAT THIS FOREVER
+            <span style="width: 60px; height: 1px; background: var(--stroke-2);"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>15 · Process</span></div>
+  </section>
+
+  <!-- ───────────────────────── 15 · QUANTITY ───────────────────── -->
+  <section data-label="16 Why ideas need quantity" class="bg-mesh">
+    <div class="frame stack" style="gap: 48px; justify-content: center;">
+      <div class="stack" style="gap: 24px;">
+        <div class="eyebrow">A weird truth about good ideas</div>
+        <h2 class="title huge" style="max-width: 1600px;">Your first idea<br/>is almost never<br/>your best idea.</h2>
+      </div>
+
+      <div class="row" style="gap: 40px; margin-top: 20px;">
+        <div class="glass" style="flex: 1; padding: 40px;">
+          <div class="mono" style="font-size: 80px; font-weight: 800; color: var(--brand-blue-deep); line-height: 1;">1st</div>
+          <p class="body-md" style="margin-top: 20px;">The obvious one. The thing everyone else also thought of.</p>
+        </div>
+        <div class="glass" style="flex: 1; padding: 40px;">
+          <div class="mono" style="font-size: 80px; font-weight: 800; color: var(--brand-violet); line-height: 1;">3rd</div>
+          <p class="body-md" style="margin-top: 20px;">Getting interesting. You're past the cliché and into the weird.</p>
+        </div>
+        <div class="glass" style="flex: 1; padding: 40px;">
+          <div class="mono" style="font-size: 80px; font-weight: 800; color: var(--brand-peach); line-height: 1;">7th</div>
+          <p class="body-md" style="margin-top: 20px;">Now you're inventing. This is where the actual product lives.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>16 · Quantity</span></div>
+  </section>
+
+  <!-- ───────────────────────── 16 · ASK & RECALL ───────────────── -->
+  <section data-label="17 Ask and recall" class="bg-mesh">
+    <div class="frame stack" style="gap: 36px;">
+      <div class="row" style="gap: 16px; align-items: center;">
+        <div class="pill" style="background: var(--brand-cta); color: white; border: none;">
+          <span style="width:10px; height:10px; border-radius:999px; background:white;"></span>
+          <span>Discussion · 10 minutes</span>
+        </div>
+      </div>
+      <div class="stack" style="gap: 12px;">
+        <div class="eyebrow">Step 1 · Your favorite apps aren't magic</div>
+        <h2 class="title">What's one app you use <em>every single day?</em></h2>
+      </div>
+
+      <div class="row grow" style="gap: 32px; align-items: stretch;">
+        <div class="glass" style="flex: 1.1; padding: 40px; display: flex; flex-direction: column; gap: 20px;">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-blue-deep);">Shout it out.</div>
+          <p class="body-lg">A game, a social app, a tool for school. <span class="mono" style="font-weight: 700;">Don't filter.</span></p>
+          <div class="row" style="gap: 10px; flex-wrap: wrap; margin-top: 8px;">
+            <span class="pill" style="background: rgba(92,124,250,0.12); border-color: var(--brand-blue);"><span>Discord</span></span>
+            <span class="pill" style="background: rgba(139,92,246,0.12); border-color: var(--brand-violet);"><span>Roblox</span></span>
+            <span class="pill" style="background: rgba(255,111,181,0.12); border-color: var(--brand-pink);"><span>Spotify</span></span>
+            <span class="pill" style="background: rgba(244,165,132,0.18); border-color: var(--brand-peach);"><span>YouTube</span></span>
+            <span class="pill"><span>TikTok</span></span>
+            <span class="pill"><span>Snapchat</span></span>
+          </div>
+        </div>
+
+        <div class="glass" style="flex: 1.4; padding: 40px; display: flex; flex-direction: column; gap: 18px; background: rgba(255,111,181,0.06); border-color: var(--brand-cta);">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-cta);">Then I dig in.</div>
+          <ul class="check-list" style="gap: 28px;">
+            <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">"What problem does this solve for you?"</span></span></li>
+            <li><span class="mark">·</span><span>If they say <em>boredom</em> → "Connect with friends, or find new music?"</span></li>
+            <li><span class="mark">·</span><span>If they say <em>Discord</em> → "Why is this better than texting?"</span></li>
+          </ul>
+          <p class="body-md" style="color: var(--fg-2); margin-top: 6px;">
+            Every app you love exists because it solves a problem <span class="mono" style="font-weight: 700; color: var(--fg-1);">better than the thing before it.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>17 · Ask & recall</span></div>
+  </section>
+
+  <!-- ───────────────────────── 17 · IDENTIFY THE FRICTION ─────── -->
+  <section data-label="18 Identify the friction" class="bg-cream">
+    <div class="frame stack" style="gap: 36px;">
+      <div class="row" style="gap: 16px; align-items: center;">
+        <div class="pill" style="background: var(--brand-blue); color: white; border: none;">
+          <span style="width:10px; height:10px; border-radius:999px; background:white;"></span>
+          <span>Solo · 5 minutes · paper out</span>
+        </div>
+      </div>
+      <div class="stack" style="gap: 12px;">
+        <div class="eyebrow">Step 2 · Find an energy leak</div>
+        <h2 class="title">Write down one thing that <em>frustrates you</em> daily.</h2>
+      </div>
+
+      <div class="row grow" style="gap: 40px; align-items: stretch;">
+        <div class="stack" style="flex: 1.1; gap: 20px; justify-content: center;">
+          <p class="body-lg">It can be inside an app you already use — or out in the real world.</p>
+          <ul class="check-list">
+            <li><span class="mark">·</span><span>Finding your gym shoes in the morning.</span></li>
+            <li><span class="mark">·</span><span>Keeping track of homework across five teachers.</span></li>
+            <li><span class="mark">·</span><span>Group chats that won't stop pinging.</span></li>
+            <li><span class="mark">·</span><span>Splitting the bill at lunch.</span></li>
+          </ul>
+          <p class="body-md" style="color: var(--fg-2); margin-top: 6px;">Write your problem at the <span class="mono" style="font-weight: 700; color: var(--fg-1);">top of the paper.</span> One sentence. That's it.</p>
+        </div>
+
+        <div class="glass" style="flex: 0.9; padding: 32px; display: flex; flex-direction: column; gap: 18px; background: rgba(244,165,132,0.10); border-color: var(--brand-peach);">
+          <div class="row" style="gap: 12px; align-items: center;">
+            <span style="background: var(--brand-peach); color: var(--fg-1); font-family: var(--font-mono); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">Amber's pro tip</span>
+          </div>
+          <p class="body-md" style="font-weight: 600; color: var(--fg-1); line-height: 1.4;">
+            Designers look for <em>energy leaks</em> — the moments you feel annoyed, stuck, or like you're doing the same dumb thing for the tenth time.
+          </p>
+          <p class="body-md" style="color: var(--fg-2);">That's exactly what you should write down.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>18 · Friction</span></div>
+  </section>
+
+  <!-- ───────────────────────── 13 · CRAZY EIGHTS ──────────────── -->
+  <section data-label="19 Crazy Eights" class="bg-ink">
+    <div class="frame stack" style="justify-content: center; gap: 48px; position: relative;">
+      <div class="orb" style="width: 600px; height: 600px; background: var(--brand-pink); top: -200px; right: -150px;"></div>
+      <div class="orb" style="width: 500px; height: 500px; background: var(--brand-blue); bottom: -150px; left: -100px;"></div>
+
+      <div class="stack" style="gap: 24px; position: relative;">
+        <div class="eyebrow on-dark">Time to draw</div>
+        <h2 class="title giant" style="color: white;">Crazy<br/>Eights.</h2>
+      </div>
+
+      <p class="body-lg" style="color: rgba(255,255,255,0.8); max-width: 1100px; position: relative;">
+        A classic exercise from Google's design team. You'll fold a piece of paper into 8 boxes
+        and sketch 8 different ideas — one per box — in 8 minutes.
+      </p>
+    </div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>19 · Exercise</span></div>
+  </section>
+
+  <!-- ───────────────────────── 14 · GOAL + RULES (combined) ──── -->
+  <section data-label="20 The goal and the rules" class="bg-paper">
+    <div class="frame stack" style="gap: 32px;">
+      <div class="stack" style="gap: 14px;">
+        <div class="eyebrow">Crazy Eights · how it works</div>
+        <h2 class="title">Sketch 8 ways to fix your problem.</h2>
+      </div>
+
+      <div class="row grow" style="gap: 40px; align-items: stretch;">
+        <!-- LEFT: the 8 boxes labeled with what goes in them -->
+        <div style="flex: 1.1; display: flex; flex-direction: column; gap: 16px;">
+          <div class="eyebrow">What goes in each box</div>
+          <div class="ce-grid" style="flex: 1;">
+            <div class="ce-cell" style="background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
+              <span class="num" style="color: var(--brand-blue-deep); font-weight: 700;">1</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Basic<br/>idea</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
+              <span class="num" style="color: var(--brand-blue-deep); font-weight: 700;">3</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Basic<br/>idea</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
+              <span class="num" style="color: var(--brand-blue-deep); font-weight: 700;">4</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Basic<br/>idea</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(139, 92, 246, 0.10); border-color: var(--brand-violet);">
+              <span class="num" style="color: var(--brand-violet); font-weight: 700;">5</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Voice?</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(139, 92, 246, 0.10); border-color: var(--brand-violet); position: relative;">
+              <span class="num" style="color: var(--brand-violet); font-weight: 700;">6</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">AI<br/>assistant?</span>
+              <span style="position: absolute; top: -10px; right: -10px; background: var(--brand-cta); color: white; font-family: var(--font-mono); font-size: 12px; font-weight: 800; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">AI twist</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(139, 92, 246, 0.10); border-color: var(--brand-violet);">
+              <span class="num" style="color: var(--brand-violet); font-weight: 700;">7</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">One<br/>button?</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(244, 165, 132, 0.18); border-color: var(--brand-peach);">
+              <span class="num" style="color: #B86838; font-weight: 700;">8</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Impossible<br/>idea</span>
+            </div>
+          </div>
+          <div class="row" style="gap: 24px; flex-wrap: wrap; margin-top: 4px;">
+            <div class="row" style="gap:10px; align-items:center;"><span style="width:14px; height:14px; background: var(--brand-blue); border-radius:4px;"></span><span class="micro" style="color:var(--fg-2);">1–4 · basic ideas</span></div>
+            <div class="row" style="gap:10px; align-items:center;"><span style="width:14px; height:14px; background: var(--brand-violet); border-radius:4px;"></span><span class="micro" style="color:var(--fg-2);">5–7 · different ways</span></div>
+            <div class="row" style="gap:10px; align-items:center;"><span style="width:14px; height:14px; background: var(--brand-peach); border-radius:4px;"></span><span class="micro" style="color:var(--fg-2);">8 · impossible</span></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: rules + AI twist -->
+        <div style="flex: 0.9; display: flex; flex-direction: column; gap: 20px; justify-content: center;">
+          <div class="stack" style="gap: 12px;">
+            <div class="eyebrow">The rules</div>
+            <ul class="check-list">
+              <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">60 seconds</span> per box.</span></li>
+              <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">Drawings only</span> — no words.</span></li>
+              <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">No wrong answers.</span></span></li>
+              <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">No erasing.</span> Move on.</span></li>
+            </ul>
+          </div>
+
+          <div class="glass" style="padding: 20px 24px; background: rgba(255, 111, 181, 0.08); border-color: var(--brand-cta);">
+            <div class="row" style="gap: 10px; align-items: center; margin-bottom: 8px;">
+              <span style="background: var(--brand-cta); color: white; font-family: var(--font-mono); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; padding: 3px 9px; border-radius: 999px; text-transform: uppercase;">AI twist</span>
+              <span class="mono" style="font-size: 14px; font-weight: 700; color: var(--fg-2);">at box 5 or 6</span>
+            </div>
+            <p class="body-sm" style="color: var(--fg-1); font-weight: 600;">Imagine your app has an AI assistant. How does it talk to you — chat bubble, voice, or invisible in the background? Sketch <em>that</em>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>20 · Rules</span></div>
+  </section>
+
+  <!-- ───────────────────────── 15 · GO ─────────────────────────── -->
+  <section data-label="21 Go" class="bg-aurora">
+    <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 32px;">
+      <div class="eyebrow on-dark">Pencils up</div>
+      <h2 class="title giant" style="color: white;">8:00</h2>
+      <p class="title" style="color: white; font-size: 64px;">Go.</p>
+      <p class="body-lg" style="color: rgba(255,255,255,0.85);">Draw fast. Draw weird. Don't stop.</p>
+    </div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>21 · Sketch</span></div>
+  </section>
+
+  <!-- ───────────────────────── 21 · PARTNER CRIT ──────────────── -->
+  <section data-label="22 Partner crit" class="bg-paper">
+    <div class="frame stack" style="gap: 36px;">
+      <div class="row" style="gap: 16px; align-items: center;">
+        <div class="pill" style="background: var(--brand-violet); color: white; border: none;">
+          <span style="width:10px; height:10px; border-radius:999px; background:white;"></span>
+          <span>Pairs · 5 minutes · 2 each way</span>
+        </div>
+      </div>
+      <div class="stack" style="gap: 12px;">
+        <div class="eyebrow">Step 4 · Show your messy sketches</div>
+        <h2 class="title">Turn to your neighbor.</h2>
+      </div>
+
+      <div class="row grow" style="gap: 32px; align-items: stretch;">
+        <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
+          <div class="mono" style="font-size: 26px; font-weight: 800; color: var(--brand-blue-deep);">You show.</div>
+          <p class="body-lg">All 8 boxes. Don't apologize for them. Don't explain. <span class="mono" style="font-weight: 700;">Just show.</span></p>
+          <p class="body-md" style="color: var(--fg-3);">2 minutes. Then swap.</p>
+        </div>
+        <div class="glass" style="flex: 1.2; padding: 40px; display: flex; flex-direction: column; gap: 18px; background: rgba(139, 92, 246, 0.08); border-color: var(--brand-violet);">
+          <div class="mono" style="font-size: 26px; font-weight: 800; color: var(--brand-violet);">They tell you two things.</div>
+          <ul class="check-list" style="gap: 28px;">
+            <li><span class="mark">✓</span><span><span class="mono" style="font-weight: 700;">"The most helpful part is…"</span></span></li>
+            <li><span class="mark">?</span><span><span class="mono" style="font-weight: 700;">"One thing that's still confusing is…"</span></span></li>
+          </ul>
+          <p class="body-md" style="color: var(--fg-2);">Not "this is cool." Not "this won't work." <em>Specific</em> + <em>curious</em>.</p>
+        </div>
+      </div>
+
+      <p class="body-md" style="color: var(--fg-2);">
+        In tech we never build the first thing we think of. We show messy sketches to teammates so the idea gets <span class="mono" style="font-weight: 700; color: var(--fg-1);">stronger.</span>
+      </p>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>22 · Crit</span></div>
+  </section>
+
+  <!-- ───────────────────────── 22 · FINAL FRAME ───────────────── -->
+  <section data-label="23 Final frame" class="bg-mesh">
+    <div class="frame stack" style="gap: 36px;">
+      <div class="row" style="gap: 16px; align-items: center;">
+        <div class="pill" style="background: var(--brand-cta); color: white; border: none;">
+          <span style="width:10px; height:10px; border-radius:999px; background:white;"></span>
+          <span>Solo · 2 minutes · flip the paper</span>
+        </div>
+      </div>
+      <div class="stack" style="gap: 12px;">
+        <div class="eyebrow">Step 5 · Take the feedback. Pick one. Refine.</div>
+        <h2 class="title">Final frame.</h2>
+      </div>
+
+      <div class="row grow" style="gap: 60px; align-items: center;">
+        <div class="stack" style="flex: 1; gap: 24px;">
+          <p class="body-lg">Take the feedback you just got. Pick your <span class="mono" style="font-weight: 700;">one best idea.</span> Flip the paper over and draw a more flushed-out version — the whole back of the page.</p>
+          <p class="body-lg">Make it clear enough that I could understand it <span class="mono" style="font-weight: 700;">without you saying a word.</span></p>
+          <div class="glass" style="padding: 20px 24px; background: rgba(244,165,132,0.12); border-color: var(--brand-peach);">
+            <p class="body-sm" style="color: var(--fg-1); font-weight: 600;">"Flushed out" doesn't mean perfect art. It means <em>clarity</em>. A strong composition. A clear button. That's all.</p>
+          </div>
+        </div>
+
+        <div class="glass" style="flex: 0.7; aspect-ratio: 9/16; max-height: 540px; padding: 24px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="height: 28px; background: rgba(15,17,21,0.08); border-radius: 8px;"></div>
+          <div style="height: 90px; background: rgba(15,17,21,0.06); border-radius: 12px;"></div>
+          <div style="height: 56px; background: rgba(15,17,21,0.06); border-radius: 12px;"></div>
+          <div style="height: 56px; background: rgba(15,17,21,0.06); border-radius: 12px;"></div>
+          <div style="flex: 1;"></div>
+          <div style="height: 76px; background: var(--brand-cta); border-radius: 16px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>23 · Refine</span></div>
+  </section>
+
+  <!-- ───────────────────────── 24 · 5-MIN TIMER ─────────────── -->
+  <section data-label="24 Final frame timer" class="bg-aurora">
+    <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 32px;">
+      <div class="eyebrow on-dark">Solo · refine your favorite</div>
+      <h2 class="title giant" style="color: white;">5:00</h2>
+      <p class="title" style="color: white; font-size: 64px;">Make it real.</p>
+      <p class="body-lg" style="color: rgba(255,255,255,0.85); max-width: 1100px;">Take the feedback. Pick the one idea you love most. Draw it bigger, with labels — like it's a real screen.</p>
+    </div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>24 · Refine</span></div>
+  </section>
+
+  <!-- ───────────────────────── 23 · GROUP SHARE ───────────────── -->
+  <section data-label="25 Group share" class="bg-cream">
+    <div class="frame stack" style="gap: 36px;">
+      <div class="row" style="gap: 16px; align-items: center;">
+        <div class="pill" style="background: var(--brand-pink); color: white; border: none;">
+          <span style="width:10px; height:10px; border-radius:999px; background:white;"></span>
+          <span>Volunteers · 5 minutes · 3–5 sketches</span>
+        </div>
+      </div>
+      <div class="stack" style="gap: 12px;">
+        <div class="eyebrow">Step 6 · Show the room</div>
+        <h2 class="title">Who wants to <em>share theirs?</em></h2>
+      </div>
+
+      <div class="row grow" style="gap: 32px; align-items: stretch;">
+        <div class="glass" style="flex: 1.1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-blue-deep);">When you stand up, two things only.</div>
+          <ul class="check-list" style="gap: 28px;">
+            <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">The problem you picked.</span> One sentence.</span></li>
+            <li><span class="mark">·</span><span><span class="mono" style="font-weight: 700;">The solution.</span> Hold up the page. Point at it.</span></li>
+          </ul>
+          <p class="body-md" style="color: var(--fg-3); margin-top: 4px;">No apologizing. No "it's not done." It's never done. Show it anyway.</p>
+        </div>
+        <div class="glass" style="flex: 0.9; padding: 40px; display: flex; flex-direction: column; gap: 16px; background: rgba(255, 111, 181, 0.06); border-color: var(--brand-cta);">
+          <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-cta);">What we just did.</div>
+          <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Identified a problem → brainstormed → got feedback → iterated → shared.</p>
+          <p class="body-md" style="color: var(--fg-2);">That's the <em>exact</em> process we use at Google. You just did it.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>25 · Share</span></div>
+  </section>
+
+  <!-- ───────────────────────── 19 · DEBRIEF ────────────────────── -->
+  <section data-label="26 What you just did" class="bg-paper">
+    <div class="frame stack" style="gap: 40px; position: relative;">
+      <!-- decorative orbs -->
+      <div class="orb" style="width: 480px; height: 480px; background: var(--brand-pink); top: -160px; left: -120px; opacity: 0.3;"></div>
+      <div class="orb" style="width: 380px; height: 380px; background: var(--brand-violet); bottom: -140px; right: -100px; opacity: 0.25;"></div>
+
+      <div class="row" style="align-items: flex-end; gap: 24px; position: relative; z-index: 1;">
+        <div class="stack" style="gap: 14px; flex: 1;">
+          <div class="eyebrow">Debrief</div>
+          <h2 class="title" style="font-size: 96px;">What you<br/>just did.</h2>
+        </div>
+        <div class="glass" style="padding: 18px 24px; align-self: center;">
+          <div class="mono" style="font-size: 18px; font-weight: 800; color: var(--brand-cta); letter-spacing: 0.1em;">CONGRATS</div>
+          <div class="mono" style="font-size: 22px; font-weight: 700; color: var(--fg-1); margin-top: 4px;">You designed today.</div>
+        </div>
+      </div>
+
+      <!-- 2x2 grid of accomplishment cards -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; position: relative; z-index: 1;">
+
+        <!-- 1 · Problem → product -->
+        <div style="padding: 32px 32px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; gap: 24px; align-items: flex-start;">
+          <div style="flex-shrink: 0; width: 88px; height: 88px; border-radius: 20px; background: linear-gradient(135deg, #FF8A3D, #FF6FB5); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 24px rgba(255,138,61,0.35);">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- target / aim -->
+              <circle cx="24" cy="24" r="18" stroke="white" stroke-width="3" fill="none"/>
+              <circle cx="24" cy="24" r="11" stroke="white" stroke-width="3" fill="none"/>
+              <circle cx="24" cy="24" r="4" fill="white"/>
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="font-size: 28px; font-weight: 700; margin: 0 0 8px; color: var(--fg-1);">Problem → product.</h3>
+            <p style="font-size: 21px; line-height: 1.4; color: var(--fg-2); margin: 0;">You took a real-world problem and turned it into product ideas. <span class="mono" style="font-weight: 700;">That's UX.</span></p>
+          </div>
+        </div>
+
+        <!-- 2 · 8 ideas -->
+        <div style="padding: 32px 32px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; gap: 24px; align-items: flex-start;">
+          <div style="flex-shrink: 0; width: 88px; height: 88px; border-radius: 20px; background: linear-gradient(135deg, #B07CF7, #5C7CFA); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 24px rgba(176,124,247,0.35);">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- 2x4 grid of crazy eights -->
+              <rect x="6" y="8" width="9" height="9" rx="1.5" fill="white"/>
+              <rect x="19" y="8" width="9" height="9" rx="1.5" fill="white" opacity="0.85"/>
+              <rect x="32" y="8" width="9" height="9" rx="1.5" fill="white" opacity="0.6"/>
+              <rect x="6" y="20" width="9" height="9" rx="1.5" fill="white" opacity="0.85"/>
+              <rect x="19" y="20" width="9" height="9" rx="1.5" fill="white"/>
+              <rect x="32" y="20" width="9" height="9" rx="1.5" fill="white" opacity="0.6"/>
+              <rect x="6" y="32" width="9" height="9" rx="1.5" fill="white" opacity="0.6"/>
+              <rect x="19" y="32" width="9" height="9" rx="1.5" fill="white" opacity="0.85"/>
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="font-size: 28px; font-weight: 700; margin: 0 0 8px; color: var(--fg-1);">8 ideas, not 1.</h3>
+            <p style="font-size: 21px; line-height: 1.4; color: var(--fg-2); margin: 0;">You didn't fall in love with the first idea. <span class="mono" style="font-weight: 700;">That's how pros do it.</span></p>
+          </div>
+        </div>
+
+        <!-- 3 · Feedback -->
+        <div style="padding: 32px 32px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; gap: 24px; align-items: flex-start;">
+          <div style="flex-shrink: 0; width: 88px; height: 88px; border-radius: 20px; background: linear-gradient(135deg, #5C7CFA, #4DD4F0); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 24px rgba(92,124,250,0.35);">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- two speech bubbles -->
+              <path d="M 8 14 H 26 a 4 4 0 0 1 4 4 v 8 a 4 4 0 0 1 -4 4 H 16 l -6 5 v -5 H 8 a 0 0 0 0 1 0 0 V 14 Z" fill="white"/>
+              <path d="M 22 24 H 38 a 4 4 0 0 1 4 4 v 6 a 4 4 0 0 1 -4 4 H 34 v 4 l -6 -4 H 22 a 4 4 0 0 1 -4 -4 v -6 a 4 4 0 0 1 4 -4 Z" fill="white" opacity="0.7"/>
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="font-size: 28px; font-weight: 700; margin: 0 0 8px; color: var(--fg-1);">Shared. Survived.</h3>
+            <p style="font-size: 21px; line-height: 1.4; color: var(--fg-2); margin: 0;">You showed work-in-progress and took feedback. <span class="mono" style="font-weight: 700;">That's 90% of the job.</span></p>
+          </div>
+        </div>
+
+        <!-- 4 · Paper not screen -->
+        <div style="padding: 32px 32px; background: white; border: 1px solid var(--stroke-1); border-radius: 22px; display: flex; gap: 24px; align-items: flex-start;">
+          <div style="flex-shrink: 0; width: 88px; height: 88px; border-radius: 20px; background: linear-gradient(135deg, #FFB07A, #F2B544); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 24px rgba(242,181,68,0.4);">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <!-- pencil over paper -->
+              <rect x="10" y="8" width="22" height="30" rx="2" fill="white" opacity="0.95"/>
+              <line x1="14" y1="16" x2="26" y2="16" stroke="#F2B544" stroke-width="1.6"/>
+              <line x1="14" y1="22" x2="28" y2="22" stroke="#F2B544" stroke-width="1.6"/>
+              <line x1="14" y1="28" x2="22" y2="28" stroke="#F2B544" stroke-width="1.6"/>
+              <!-- pencil -->
+              <g transform="rotate(35 36 26)">
+                <rect x="32" y="14" width="4" height="22" fill="white"/>
+                <polygon points="32,36 36,36 34,42" fill="white"/>
+                <rect x="32" y="12" width="4" height="3" fill="#1A1A1F"/>
+              </g>
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="font-size: 28px; font-weight: 700; margin: 0 0 8px; color: var(--fg-1);">Paper, not pixels.</h3>
+            <p style="font-size: 21px; line-height: 1.4; color: var(--fg-2); margin: 0;">Same way designers at <span class="mono" style="font-weight: 700;">Google, Apple, and Snap</span> still do it every week.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>26 · Debrief</span></div>
+  </section>
+
+  <!-- ───────────────────────── 20 · IF THIS WAS FUN ────────────── -->
+  <section data-label="27 If this was fun" class="bg-mesh">
+    <div class="frame stack" style="gap: 48px;">
+      <div class="stack" style="gap: 16px;">
+        <div class="eyebrow">Keep going</div>
+        <h2 class="title">If this was fun…</h2>
+      </div>
+
+      <div class="row grow" style="gap: 32px;">
+        <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-blue-deep);">This week</div>
+          <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Open any app you use. Find one thing that annoys you. Sketch a fix.</p>
+        </div>
+        <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-violet);">This month</div>
+          <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Try Figma (it's free). Rebuild a screen from your favorite app, your way.</p>
+        </div>
+        <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-peach);">This year</div>
+          <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Look up "design clubs" near you. Or start one. Pizza + sketching = real.</p>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>27 · Next steps</span></div>
+  </section>
+
+  <!-- ───────────────────────── 21 · THANKS ─────────────────────── -->
+  <section data-label="28 Thanks" class="bg-hero">
+    <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 40px;">
+      <div class="eyebrow">That's the workshop</div>
+      <h2 class="title huge">Thanks for<br/>designing with me.</h2>
+      <p class="body-lg" style="max-width: 1100px;">
+        You officially have one UX exercise under your belt. That's one more than most adults.
+      </p>
+      <div class="pill" style="margin-top: 20px;"><span class="dot"></span><span>Questions?</span></div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Hey everyone! I'm Amber. Quick show of hands — who has a phone or tablet they use pretty much every day? Basically everybody. Today we're going to talk about the people who design what's on those screens. Not the engineers who code it — the designers who decide what it looks like, where the buttons go, and how it feels to use. Heads up: this is not a sit-still kind of workshop. You will be standing up and walking around in about ten minutes. By the end of 45 minutes, you're going to do exactly what I do at work.",
+  "Here's the plan. Five minutes of me talking about what tech jobs actually look like. Then about eight minutes on what UX is, with examples you'll recognize. Then we get on our feet for a room-spectrum activity. Then I'll have you each pick a real-life problem that bugs YOU — and we'll spend twenty minutes on Crazy Eights: sketch eight solutions, get partner feedback, refine your favorite, and a few of you will share with the room. We wrap with five minutes of debrief. Stop me with questions any time.",
+  "So a quick bit about me. I'm Amber, and I lead a UX team at Google — that's my day job. But I want you to notice something: I'm not just a 'tech person.' Outside of work I paint, I'm writing a novel, and I make music with a project called Ada Fen. The reason I'm telling you that is because most people think working in tech means you have to be a coder. That's not true. I don't write code. I spend my day solving problems for people. If you can draw, if you can make music, or if you just know when an app feels broken — you already have the skills to be a designer.",
+  "Quick myth-bust. When people say 'tech jobs,' most of you probably picture someone in a hoodie typing code at 3 a.m. That's a real job — engineers are awesome — but it's maybe a third of the people who make an app. Before any code gets written, a whole team has already decided what to build, who it's for, and how it should feel. Those people aren't engineers. One of them is me.",
+  "OK, so what is UX? UX stands for 'user experience.' My job is to make sure that when you pick up an app for the first time, it just makes sense. You don't have to ask a friend how to use it. You don't get lost. You don't rage-quit. I design the path you take through the app — not just what it looks like, but where you go, what happens when you tap, and how you feel along the way.",
+  "Quick detour, because everybody's asking about it: AI. Most people think AI is a smart robot that knows everything. It's not. The way I think about it: AI is a really fast, really powerful intern. Great at following patterns. Doesn't actually KNOW anything until somebody teaches it — and that somebody is a designer. Designing for AI means three jobs. ONE: GUARDRAILS — AI says weird, wrong, sometimes harmful stuff, and designers build the safety nets. TWO: PERSONALITY — should it sound like a serious professor or a chill friend? A designer made that choice. THREE: INTENT — when you ask AI for help, it has to guess what you actually want, and designers help it read the room. At Google we call this Agentic UX — the tech does work for you so you spend more time being creative.",
+  "You already know the difference between good and bad UX — you just haven't had a name for it. Bad UX is a door that says PUSH but you have to pull. An app that hides the back button. A form that erases everything when you mistype one character. It makes you feel dumb — but you're not dumb, the design is dumb. Good UX is the opposite. Snapchat opens straight to the camera because that's what you came for. Good UX is invisible. You don't notice it. That's the goal.",
+  "OK — stand up. Everybody. Push the chairs back if you need to. The left wall is 'I HATE IT.' The right wall is 'I LOVE IT.' I'm going to ask you four questions, and after each one you walk to where you actually feel — left, right, anywhere in the middle. No talking, just move.",
+  "Question one. How do you feel about how TikTok or YouTube picks the next video for you? Move now. [Pause five seconds.] Look around. Notice the spread. [Optional: ask one person on each side why.]",
+  "Question two. Talking to an AI like it's a person — giving it a name, asking it for advice, just venting to it after a bad day. Walk LEFT if that's WEIRD — you'd rather talk to a real human, or honestly to nobody. Walk RIGHT if it's HELPFUL — easy, low-pressure, no judgment. Anywhere in between is fine. [Look around.] OK — here's the thing. There's no right answer, but here's why I'm asking: somebody at every AI company decided whether that thing sounds like a robot reading a manual, or like a chill friend. That's a real design choice — we call it personality design. The AI didn't pick its own voice. A human did.",
+  "Question three. How do you feel about the notifications your phone sends you every day? Move. [Pause.] Anybody in the middle — what would have to change to push you all the way to the right? [Take one or two answers.] Whatever they just said — that's the design goal. That's literally what UX designers chase every day.",
+  "Last question, and it's a different one: walk LEFT if you think AI is going to make your life EASIER, RIGHT if you think it's going to make things more CONFUSING. Move. [Pause.] If YOU were the boss of an AI today, what's the first chore you'd give it to do? [Take one or two answers — anything goes.] Hold that thought, because in a few minutes you're going to design one. Everybody sit back down.",
+  "Let's get back in the middle of the room — this one's a bit more serious. AI. You hear about it constantly. I want to know how you actually feel. Three options. Walk to the LEFT WALL if you think AI is going to be the best tool humans ever invented — it'll do your chores, help you create, solve big problems. Walk to the RIGHT WALL if AI is honestly kind of scary — you're worried about it taking over, being creepy, or making it impossible to know what's real. Stay in the MIDDLE if you're just confused and think the whole thing is overhyped. Go. [Pause, look around.] Pick one or two from each side and ask them why. There's no right answer. The reason I'm asking is because every designer working on AI right now is reading this exact room — your gut feeling is data. OK, walk back to your seats.",
+  "If a UX designer could only ever ask one question on the job, it would be this one. Who is this for, and what are they trying to do? Every screen, every button, every word you see in any app — somebody answered some version of this question to put it there. When you start sketching in a few minutes, that's the question I want you holding in your head.",
+  "Here's how a real product gets made, super simplified. Step 1, NOTICE — find a real problem. Step 2, IMAGINE — sketch a ton of ideas, fast and messy. Step 3, TRY — pick the best, build a rough version, hand it to a real person. Step 4, FIX — watch where they get stuck, change it, do it again. Forever. Today we're skipping straight to step 2 — the imagining part — because it's the most fun and it's where ideas come from.",
+  "Weird truth before we sketch. Your first idea? Almost never your best. The first idea is the obvious one — also the one everyone else just thought of. Around your third or fourth idea it gets interesting — you've left the cliché behind. By idea seven or eight you're inventing things. That's where actual products come from. So we don't ask designers for one great idea. We ask for eight bad ones, because hidden inside those eight is one great one.",
+  "OK, before we sketch — your favorite apps are not magic. They're solutions. Quick round-robin: tell me one app or program you use every single day. Could be a game, a social app, a school tool. [Take 5–6 answers — Discord, Roblox, Spotify, YouTube, TikTok, whatever.] Now follow up on each one: 'What problem does this solve for you?' If they say boredom, push: 'Does it help you connect with friends, or find new music you actually like?' If they say Discord, push: 'Why is this better than just texting?' Here's the takeaway: every app you love exists because it solves a problem better than the thing that came before it. That's literally the whole job. Now we're going to do the same thing — except YOU pick the problem.",
+  "Take out a piece of paper. At the very top, I want you to write down ONE thing in your daily life that frustrates you. It can be inside an app you already use, or out in the real world — finding your gym shoes, keeping track of homework across five teachers, splitting the bill at lunch, group chats that won't stop. Designers call these 'energy leaks' — the moments where you feel annoyed or stuck. Whatever's bugging you the most right now — write it at the top of the page. One sentence. You have a couple of minutes. This is the problem you're going to solve.",
+  "This is Crazy Eights — a real exercise the design team at Google uses. 8 ideas, 8 boxes, 8 minutes — 60 seconds per box. The 'crazy' part is the speed — you don't have time to second-guess yourself, and that's the whole point.",
+  "Here's the goal: sketch eight ways to fix the problem you just wrote at the top of your paper. The trick is what goes in each box. Boxes 1 through 4 — basic ideas, the obvious stuff, get them out fast so they stop blocking you. Boxes 5, 6, 7 — different KINDS of solutions: what if it was voice instead of buttons? What if it was just one giant button? And here's the AI twist — in box 5 or 6, your app has an AI assistant. You decide how it shows up: a chat bubble you talk to, a voice, or a hidden helper that just works in the background. Sketch THAT. Box 8 — something that sounds impossible today, no rules, go nuts. Three rules: 60 seconds per box. Drawings only — no words. No wrong answers. And no erasing — if you mess up, just move on. Fold your paper into 8 boxes now — in half, in half, in half.",
+  "Pencils up, paper folded? Eight minutes on the clock starting NOW. 60 seconds per box. Draw fast. Draw weird. Don't stop, even if you think the idea is stupid — just put it down and move to the next box. I'll call out the change every minute. Go!",
+  "Time. Pencils down. Now we get feedback before anybody falls in love with their first idea — turn to whoever is sitting next to you. Designers call this a 'crit.' Sounds scary, isn't. You're going to show your partner all 8 boxes — don't apologize for them, don't explain, just show. They're going to give you two things, and ONLY two things. One: 'The most helpful part is BLANK.' Two: 'One thing that's still confusing is BLANK.' That's it. Specific, not 'this is cool' — specific. Then swap. Two minutes each way. In tech we never build the first thing we think of. We show messy work to teammates and the idea gets stronger. That's what you're doing right now. Go.",
+  "Last creative push. Take the feedback you just got from your partner and pick your one best idea. Two minutes. Flip the paper over and draw a more flushed-out version on the back — the whole page. And listen — 'flushed out' does NOT mean 'perfect art.' I'm a painter; I know the difference between pretty and clear. What I want is clarity. Strong composition. One main button. One main thing the user sees first. Make it so I could understand the idea without you saying a word. That's the whole bar. Go.",
+  "Five minutes on the clock. Solo. Take the feedback your partner just gave you, pick the ONE idea you love most — usually it's not your first one — and draw it again, bigger. Add labels. What does the user tap? What happens next? Pretend this is a real screen. This is the version you're going to show the room. Three, two, one, go.",
+  "OK — last bit before we wrap. I want three to five volunteers to stand up and share. Don't be shy — nobody's work is done, that's the whole point. When you stand up, you tell us TWO things only. One: the problem you picked. Just one sentence. Two: the solution. Hold up your page, point at it, talk us through it. No apologizing, no 'it's not done' — nothing's ever done. Show it anyway. [Take 3–5 volunteers, ~1 minute each. Reflect back what's strong about each one in a sentence.] Look at what you all just pulled off. You identified a problem. You brainstormed. You got feedback. You iterated. You shared. That is the EXACT process we use at Google. You just did it.",
+  "Welcome back. Look at what you just pulled off. You took a real-world problem and turned it into product ideas — that's literally UX design, you just did it. You generated 8 ideas before falling in love with one — that's how every actual designer at every actual company gets unstuck. You showed work that wasn't done yet to someone else and survived — that's 90% of working as a designer. And you did all of it on paper. Designers at Google, Apple, Snapchat still start every project on paper. You're already doing the real thing.",
+  "If any part of this was fun, here's what to do next. This week: open any app you use, find one thing that annoys you, sketch a fix on paper. That's all. This month: try Figma — it's free, and you can rebuild any screen from any app the way YOU think it should look. This year: look up design clubs at your school or local library. If there isn't one, start one. The internet has a million free UX tutorials. The hardest part is starting, and you already started today.",
+  "That's the workshop. You officially have one UX exercise under your belt — that's one more than most adults walking around. Hold on to your sketches. I'm serious — keep them. In a few years, when somebody asks why you got into design, you'll have the actual paper to show them. Thanks for designing with me today. What questions do you have?"
+]
+</script>
+
+<script src="deck-stage.js"></script>
+
+<!-- ============================ TWEAKS ============================ -->
+<script>
+(function(){
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "amberPhotoScale": 1.2,
+    "amberPaneFlex": 1.45,
+    "amberDiscScale": 1.55
+  }/*EDITMODE-END*/;
+
+  const photo = document.getElementById('amber-photo');
+  const pane  = document.getElementById('amber-photo-pane');
+  const disc  = document.getElementById('amber-disc');
+
+  function apply(t) {
+    if (photo) {
+      photo.style.transform = 'scale(' + t.amberPhotoScale + ')';
+      photo.style.transformOrigin = 'bottom center';
+    }
+    if (pane)  pane.style.flex = String(t.amberPaneFlex);
+    if (disc) {
+      disc.style.transform = 'translate(-50%, -45%) scale(' + t.amberDiscScale + ')';
+    }
+  }
+  apply(TWEAKS);
+
+  // ---------- Panel UI ----------
+  let panel = null;
+  function buildPanel(){
+    panel = document.createElement('div');
+    panel.id = 'tweaks-panel';
+    panel.style.cssText = `
+      position: fixed; right: 24px; bottom: 24px; z-index: 99999;
+      width: 320px; padding: 20px 22px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(15,17,21,0.12);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(40,50,90,0.25);
+      font-family: 'SUSE', -apple-system, sans-serif;
+      color: #0F1115;
+      display: none;
+    `;
+    panel.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px;">
+        <div style="font-family: 'SUSE Mono', monospace; font-weight:800; font-size:18px; letter-spacing:-0.01em;">Tweaks</div>
+        <button id="tw-close" style="background:transparent; border:none; font-size:20px; cursor:pointer; color:#5B6172; line-height:1;">×</button>
+      </div>
+      <div style="font-family:'SUSE Mono',monospace; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#5B6172; margin-bottom:6px;">Slide 04 · Amber photo</div>
+
+      <label style="display:block; font-size:13px; margin-top:14px; color:#2B2F3A;">Photo size <span id="tw-photo-val" style="float:right; font-family:'SUSE Mono',monospace; color:#5B6172;"></span></label>
+      <input id="tw-photo" type="range" min="0.8" max="2.6" step="0.05" style="width:100%; accent-color:#5C7CFA;" />
+
+      <label style="display:block; font-size:13px; margin-top:14px; color:#2B2F3A;">Pane width <span id="tw-pane-val" style="float:right; font-family:'SUSE Mono',monospace; color:#5B6172;"></span></label>
+      <input id="tw-pane" type="range" min="0.6" max="1.8" step="0.05" style="width:100%; accent-color:#5C7CFA;" />
+
+      <label style="display:block; font-size:13px; margin-top:14px; color:#2B2F3A;">Backdrop disc <span id="tw-disc-val" style="float:right; font-family:'SUSE Mono',monospace; color:#5B6172;"></span></label>
+      <input id="tw-disc" type="range" min="0.8" max="2.4" step="0.05" style="width:100%; accent-color:#5C7CFA;" />
+
+      <button id="tw-jump" style="margin-top:18px; width:100%; padding:10px; border:none; border-radius:10px;
+          background: linear-gradient(135deg, #FF6FB5 0%, #B07CF7 50%, #5C7CFA 100%);
+          color:white; font-family:'SUSE Mono',monospace; font-weight:700; font-size:13px; cursor:pointer;">
+        Jump to slide 4
+      </button>
+    `;
+    document.body.appendChild(panel);
+
+    const $photo = panel.querySelector('#tw-photo');
+    const $pane  = panel.querySelector('#tw-pane');
+    const $disc  = panel.querySelector('#tw-disc');
+    const $pv    = panel.querySelector('#tw-photo-val');
+    const $panv  = panel.querySelector('#tw-pane-val');
+    const $dv    = panel.querySelector('#tw-disc-val');
+
+    function syncUI(){
+      $photo.value = TWEAKS.amberPhotoScale;
+      $pane.value  = TWEAKS.amberPaneFlex;
+      $disc.value  = TWEAKS.amberDiscScale;
+      $pv.textContent   = Number(TWEAKS.amberPhotoScale).toFixed(2) + '×';
+      $panv.textContent = Number(TWEAKS.amberPaneFlex).toFixed(2);
+      $dv.textContent   = Number(TWEAKS.amberDiscScale).toFixed(2) + '×';
+    }
+    syncUI();
+
+    function persist(key, val){
+      TWEAKS[key] = val;
+      apply(TWEAKS);
+      syncUI();
+      try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{[key]: val}}, '*'); } catch(e){}
+    }
+    $photo.addEventListener('input', e => persist('amberPhotoScale', parseFloat(e.target.value)));
+    $pane.addEventListener('input',  e => persist('amberPaneFlex',   parseFloat(e.target.value)));
+    $disc.addEventListener('input',  e => persist('amberDiscScale',  parseFloat(e.target.value)));
+
+    panel.querySelector('#tw-close').addEventListener('click', () => {
+      panel.style.display = 'none';
+      try { window.parent.postMessage({type:'__edit_mode_dismissed'}, '*'); } catch(e){}
+    });
+    panel.querySelector('#tw-jump').addEventListener('click', () => {
+      const stage = document.querySelector('deck-stage');
+      if (stage && stage.goTo) stage.goTo(3);
+    });
+  }
+
+  window.addEventListener('message', (e) => {
+    const t = e.data && e.data.type;
+    if (t === '__activate_edit_mode') {
+      if (!panel) buildPanel();
+      panel.style.display = 'block';
+      const stage = document.querySelector('deck-stage');
+      if (stage && stage.goTo) stage.goTo(3);
+    } else if (t === '__deactivate_edit_mode') {
+      if (panel) panel.style.display = 'none';
+    }
+  });
+
+  try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
+})();
+</script>
+</body>
+</html>
