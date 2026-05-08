@@ -230,7 +230,6 @@
     margin: 0;
   }
 
-
   /* Crazy 8s grid */
   .ce-grid {
     display: grid;
@@ -354,7 +353,7 @@
       <div class="row" style="justify-content: space-between; align-items: center;">
         <div class="pill"><span class="dot"></span><span>UX Design Workshop</span></div>
         <div class="row" style="gap: 14px; align-items: center;">
-          <span class="micro mono" style="letter-spacing: 0.18em;">01 / 27</span>
+          <span class="micro mono" style="letter-spacing: 0.18em;">01 / 30</span>
           <span style="width: 28px; height: 1px; background: var(--stroke-2);"></span>
           <span class="micro mono" style="letter-spacing: 0.18em;">45 MIN</span>
         </div>
@@ -386,7 +385,7 @@
             <div class="micro mono" style="letter-spacing: 0.18em; color: var(--fg-2);">TODAY YOU'LL...</div>
           </div>
           <p class="body-lg" style="color: var(--fg-1); margin: 0;">
-            Pick a problem that bugs you. Sketch <span class="mono" style="font-weight: 700; color: var(--brand-violet);">8 solutions</span> in 8 minutes. Get feedback. Share with the room.
+            Pick a problem that bothers you. Sketch <span class="mono" style="font-weight: 700; color: var(--brand-violet);">8 solutions</span> in 8 minutes. Get feedback. Share with the room.
           </p>
           <div style="height: 1px; background: var(--stroke-2);"></div>
           <p class="micro mono" style="color: var(--fg-3); margin: 0; line-height: 1.5;">
@@ -455,14 +454,14 @@
 
         <div class="row" style="gap: 32px; align-items: center;">
           <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-blue-deep); width: 140px;">20 min</div>
-          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">19 — 25</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">20 — 27</div>
           <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;"><span class="mono" style="font-weight: 700;">Crazy Eights</span> — sketch 8 ideas, crit with a partner, refine, share</div>
         </div>
         <div style="height:1px; background: var(--stroke-2);"></div>
 
         <div class="row" style="gap: 32px; align-items: center;">
           <div class="mono" style="font-size: 38px; font-weight: 800; color: var(--brand-violet); width: 140px;">5 min</div>
-          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">26 — 28</div>
+          <div class="mono" style="font-size: 14px; color: var(--fg-3); width: 110px; letter-spacing: 0.16em;">28 — 30</div>
           <div class="body-lg" style="font-weight: 600; color: var(--fg-1); flex: 1;">Debrief — what you just did, and what to try next</div>
         </div>
       </div>
@@ -732,24 +731,106 @@
       </div>
 
       <div class="compare">
-        <div class="panel bad">
-          <div class="label">Bad UX</div>
-          <p class="title" style="font-size: 48px; line-height: 1.1;">A door that says PUSH but you have to pull.</p>
-          <p class="body-md" style="color: var(--fg-2);">
-            Doors with flat handles. Apps that hide the back button. Forms that make you start over because of one typo.
-          </p>
-          <p class="body-md mono" style="color: #B82430; font-weight: 700; margin-top: auto;">
-            Makes you feel dumb. (You're not.)
+        <!-- BAD UX -->
+        <div class="panel bad" style="position: relative; overflow: hidden; padding: 40px;">
+          <div class="row" style="justify-content: space-between; align-items: flex-start;">
+            <div class="label">Bad UX</div>
+            <div class="micro mono" style="color: #B82430; letter-spacing: 0.16em;">EVERYDAY OFFENDERS</div>
+          </div>
+
+          <p class="title" style="font-size: 44px; line-height: 1.05; margin: 0;">Makes you feel<br/>like <em>you</em> broke it.</p>
+
+          <!-- SVG illustration: fake X button on a game ad -->
+          <div style="background: rgba(255,255,255,0.55); border-radius: 18px; padding: 18px; display: flex; align-items: center; gap: 18px; margin: 4px 0;">
+            <svg viewBox="0 0 200 130" width="170" height="110" style="flex-shrink: 0;">
+              <!-- fake ad banner -->
+              <rect x="6" y="6" width="188" height="118" rx="10" fill="#2B1F3F"/>
+              <rect x="14" y="14" width="172" height="50" rx="6" fill="#FF6FB5" opacity="0.85"/>
+              <text x="100" y="44" font-family="SUSE, sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">PLAY NOW!</text>
+              <rect x="14" y="72" width="80" height="44" rx="6" fill="#5C7CFA"/>
+              <text x="54" y="99" font-family="SUSE, sans-serif" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">INSTALL</text>
+              <rect x="100" y="72" width="86" height="44" rx="6" fill="#FFD166"/>
+              <text x="143" y="99" font-family="SUSE, sans-serif" font-size="11" font-weight="700" fill="#2B1F3F" text-anchor="middle">CLAIM</text>
+              <!-- tiny real X -->
+              <circle cx="180" cy="20" r="7" fill="rgba(255,255,255,0.5)" stroke="#fff" stroke-width="1"/>
+              <path d="M177 17 L183 23 M183 17 L177 23" stroke="#2B1F3F" stroke-width="1.4" stroke-linecap="round"/>
+              <!-- arrow pointing to it -->
+              <path d="M150 -2 Q175 -8 180 14" stroke="#B82430" stroke-width="1.8" fill="none" stroke-dasharray="3 3"/>
+            </svg>
+            <div class="stack" style="gap: 4px;">
+              <div class="mono" style="font-size: 14px; font-weight: 800; color: #B82430; letter-spacing: 0.1em;">THE FAKE X</div>
+              <div class="micro" style="color: var(--fg-2); line-height: 1.35;">The close button is 8 pixels wide. The whole rest of the ad opens the App Store.</div>
+            </div>
+          </div>
+
+          <ul class="stack" style="list-style: none; padding: 0; margin: 0; gap: 12px;">
+            <li class="row" style="gap: 12px; align-items: flex-start;">
+              <span class="mono" style="font-size: 14px; font-weight: 800; color: #B82430;">→</span>
+              <span class="body-md" style="color: var(--fg-2); line-height: 1.35;">"Are you still watching?" Yes. I'm right here.</span>
+            </li>
+            <li class="row" style="gap: 12px; align-items: flex-start;">
+              <span class="mono" style="font-size: 14px; font-weight: 800; color: #B82430;">→</span>
+              <span class="body-md" style="color: var(--fg-2); line-height: 1.35;">Cancel subscription buried 6 menus deep, on purpose.</span>
+            </li>
+            <li class="row" style="gap: 12px; align-items: flex-start;">
+              <span class="mono" style="font-size: 14px; font-weight: 800; color: #B82430;">→</span>
+              <span class="body-md" style="color: var(--fg-2); line-height: 1.35;">"Click all the buses" — but is the front of a bus a bus?</span>
+            </li>
+          </ul>
+
+          <p class="body-md mono" style="color: #B82430; font-weight: 700; margin: 0; padding-top: 12px; border-top: 1px dashed rgba(184, 36, 48, 0.3);">
+            You didn't break it. The design did.
           </p>
         </div>
-        <div class="panel good">
-          <div class="label">Good UX</div>
-          <p class="title" style="font-size: 48px; line-height: 1.1;">A door with a handle that says "pull me."</p>
-          <p class="body-md" style="color: var(--fg-2);">
-            Snapchat opens straight to the camera. The volume button does what you expect. Undo exists.
-          </p>
-          <p class="body-md mono" style="color: #1A7A4F; font-weight: 700; margin-top: auto;">
-            You don't even notice it. That's the goal.
+
+        <!-- GOOD UX -->
+        <div class="panel good" style="position: relative; overflow: hidden; padding: 40px;">
+          <div class="row" style="justify-content: space-between; align-items: flex-start;">
+            <div class="label">Good UX</div>
+            <div class="micro mono" style="color: #1A7A4F; letter-spacing: 0.16em;">QUIET WINS</div>
+          </div>
+
+          <p class="title" style="font-size: 44px; line-height: 1.05; margin: 0;">Feels obvious.<br/><em>Actually invisible.</em></p>
+
+          <!-- SVG illustration: pull-to-refresh -->
+          <div style="background: rgba(255,255,255,0.55); border-radius: 18px; padding: 18px; display: flex; align-items: center; gap: 18px; margin: 4px 0;">
+            <svg viewBox="0 0 200 130" width="170" height="110" style="flex-shrink: 0;">
+              <!-- phone outline -->
+              <rect x="50" y="6" width="100" height="118" rx="14" fill="#2B1F3F"/>
+              <rect x="56" y="14" width="88" height="102" rx="8" fill="#F6F1E7"/>
+              <!-- header bar -->
+              <rect x="56" y="14" width="88" height="20" rx="0" fill="#1A7A4F" opacity="0.9"/>
+              <!-- spinner being pulled down -->
+              <circle cx="100" cy="48" r="10" fill="none" stroke="#1A7A4F" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="42 18" transform="rotate(-90 100 48)"/>
+              <!-- dotted line showing pull direction -->
+              <path d="M100 64 L100 88" stroke="#1A7A4F" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 4"/>
+              <path d="M94 82 L100 90 L106 82" stroke="#1A7A4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <!-- finger -->
+              <circle cx="100" cy="100" r="8" fill="#FFB07A" stroke="#2B1F3F" stroke-width="1.2"/>
+            </svg>
+            <div class="stack" style="gap: 4px;">
+              <div class="mono" style="font-size: 14px; font-weight: 800; color: #1A7A4F; letter-spacing: 0.1em;">PULL-TO-REFRESH</div>
+              <div class="micro" style="color: var(--fg-2); line-height: 1.35;">Nobody taught you this. You just tried it. It worked. Twitter invented it in 2008.</div>
+            </div>
+          </div>
+
+          <ul class="stack" style="list-style: none; padding: 0; margin: 0; gap: 12px;">
+            <li class="row" style="gap: 12px; align-items: flex-start;">
+              <span class="mono" style="font-size: 14px; font-weight: 800; color: #1A7A4F;">→</span>
+              <span class="body-md" style="color: var(--fg-2); line-height: 1.35;">iPhone silent switch — you can <em>feel</em> if your phone is loud.</span>
+            </li>
+            <li class="row" style="gap: 12px; align-items: flex-start;">
+              <span class="mono" style="font-size: 14px; font-weight: 800; color: #1A7A4F;">→</span>
+              <span class="body-md" style="color: var(--fg-2); line-height: 1.35;">Snapchat opens to the camera. That's why you opened it.</span>
+            </li>
+            <li class="row" style="gap: 12px; align-items: flex-start;">
+              <span class="mono" style="font-size: 14px; font-weight: 800; color: #1A7A4F;">→</span>
+              <span class="body-md" style="color: var(--fg-2); line-height: 1.35;">Tap-back-15-seconds on a podcast. You'd never not have it.</span>
+            </li>
+          </ul>
+
+          <p class="body-md mono" style="color: #1A7A4F; font-weight: 700; margin: 0; padding-top: 12px; border-top: 1px dashed rgba(26, 122, 79, 0.3);">
+            You don't notice it. That's the whole point.
           </p>
         </div>
       </div>
@@ -809,21 +890,21 @@
   </section>
 
   <!-- ───────────────────────── 09 · SPECTRUM Q2 ──────────────────── -->
-  <section data-label="10 Spectrum Q2 - terms" class="bg-paper">
+  <section data-label="10 Spectrum Q2 - streaks" class="bg-paper">
     <div class="frame stack" style="justify-content: center; gap: 40px;">
       <div class="row" style="gap: 24px; align-items: center;">
         <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-violet);">QUESTION 02</div>
         <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
       </div>
-      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">Talking to an AI<br/>like it's a person.</h2>
-      <p class="body-md" style="color: var(--fg-2); max-width: 1500px; margin-top: -12px;">Giving it a name, asking it for advice, or just venting to it.</p>
+      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;"></h2>
+      <p class="body-md" style="color: var(--fg-2); max-width: 1500px; margin-top: -12px;">The little fire emoji that disappears if you miss a single day.</p>
       <div class="row" style="gap: 24px; align-items: center; margin-top: 16px;">
-        <div class="mono" style="font-size: 22px; font-weight: 800; color: #B82430; min-width: 320px;">← WEIRD · I'd rather a human</div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #B82430; min-width: 320px;">← FEELS LIKE A CHORE</div>
         <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
-        <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 320px; text-align: right;">HELPFUL · easy to talk to →</div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 320px; text-align: right;">LOVE KEEPING IT ALIVE →</div>
       </div>
       <div class="glass" style="padding: 22px 28px; margin-top: 12px;">
-        <p class="body-md" style="color: var(--fg-1);"><span class="mono" style="font-weight: 700; color: var(--brand-violet);">PERSONALITY DESIGN ·</span> Someone had to decide whether that AI sounds like a robot or a friend.</p>
+        <p class="body-md" style="color: var(--fg-1); font-size: 22px;"><span class="mono" style="font-weight: 700; color: var(--brand-violet);">ENGAGEMENT DESIGN ·</span> Streaks, badges, and notifications are designed to bring you back. Sometimes that's a gift. Sometimes it's a trap.</p>
       </div>
     </div>
     <div class="chrome"><span class="brand">UX 101</span><span>10 · Spectrum 02</span></div>
@@ -842,7 +923,7 @@
         <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
         <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 200px; text-align: right;">LOVE IT →</div>
       </div>
-      <p class=”body-md” style=”color: var(--fg-3); margin-top: 8px;”>To anyone in the middle: <span class=”mono” style=”font-weight: 700; color: var(--fg-1);”>”What would push you right?”</span> — that answer is the design goal.</p>
+      <p class="body-md" style="color: var(--fg-3); margin-top: 8px; ">To anyone in the middle: <span class="mono" style="font-weight: 700; color: var(--fg-1);">“What would push you right?”</span> — that answer is the design goal.</p>
     </div>
     <div class="chrome"><span class="brand">UX 101</span><span>11 · Spectrum 03</span></div>
   </section>
@@ -854,14 +935,15 @@
         <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-cta);">QUESTION 04 · AI</div>
         <div style="flex: 1; height: 2px; background: var(--stroke-2);"></div>
       </div>
-      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">Is AI going to make<br/>your life easier — or<br/>more confusing?</h2>
+      <h2 class="title huge" style="max-width: 1700px; font-size: 96px;">AI doing your<br/>homework for you.</h2>
+      <p class="body-md" style="color: var(--fg-2); max-width: 1500px; margin-top: -12px;">Helping you write the essay, summarize the chapter, or just give you the answer.</p>
       <div class="row" style="gap: 24px; align-items: center; margin-top: 16px;">
-        <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-cta); min-width: 240px;">← EASIER</div>
-        <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #FF6FB5 0%, #B07CF7 50%, #5C7CFA 100%);"></div>
-        <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-blue-deep); min-width: 240px; text-align: right;">MORE CONFUSING →</div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #B82430; min-width: 320px;">← FEELS LIKE CHEATING</div>
+        <div class="grow" style="height: 8px; border-radius: 999px; background: linear-gradient(90deg, #E5484D 0%, #F2B544 50%, #2DB67C 100%);"></div>
+        <div class="mono" style="font-size: 22px; font-weight: 800; color: #1A7A4F; min-width: 320px; text-align: right;">FEELS LIKE A CALCULATOR →</div>
       </div>
-      <div class="glass" style="padding: 24px 32px; margin-top: 16px;">
-        <p class=”body-md” style=”color: var(--fg-1);”>Pick someone on either side: <span class=”mono” style=”font-weight: 700;”>”If you were the boss of an AI today, what's the first chore you'd give it?”</span></p>
+      <div class="glass" style="padding: 22px 28px; margin-top: 12px;">
+        <p class="body-md" style="color: var(--fg-1); font-size: 22px;"><span class="mono" style="font-weight: 700; color: var(--brand-cta);">INTENT DESIGN ·</span> Designers decide where AI helps and where it makes you do the work yourself. There's no neutral default — somebody picks.</p>
       </div>
     </div>
     <div class="chrome"><span class="brand">UX 101</span><span>12 · Spectrum 04</span></div>
@@ -891,7 +973,7 @@
         <!-- RIGHT WALL -->
         <div class="glass" style="flex: 1; padding: 28px 28px; border: 2px solid var(--brand-blue-deep); background: rgba(92,124,250,0.10);">
           <div class="mono" style="font-size: 22px; font-weight: 800; color: var(--brand-blue-deep); margin-bottom: 12px; text-align: right;">RIGHT WALL →</div>
-          <p class="body-md" style="line-height: 1.4; text-align: right;"><span class="mono" style="font-weight: 700;">Kinda scary.</span> Taking over, creepy, can't tell what's real.</p>
+          <p class="body-md" style="font-size: 24px; line-height: 1.4; text-align: right;"><span class="mono" style="font-weight: 700;">A little unsettling.</span> Taking over, intrusive, hard to tell what's real.</p>
         </div>
       </div>
     </div>
@@ -1004,8 +1086,56 @@
     <div class="chrome"><span class="brand">UX 101</span><span>16 · Quantity</span></div>
   </section>
 
+  <!-- ───────────────────────── 17 · WHAT THE WORLD DOWNLOADS ─── -->
+  <section data-label="17 What the world downloads" class="bg-cream" style="padding: 0;">
+    <div style="position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
+      <!-- LEFT: appfigures chart -->
+      <div style="position: relative; padding: 80px 56px; display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 18px; padding: 12px; box-shadow: 0 24px 60px rgba(20,20,40,0.12); border: 1px solid var(--stroke-2); overflow: hidden; max-height: 920px; max-width: 920px;">
+          <img src="assets/top-apps-2026.png" alt="The most downloaded apps worldwide, January 2026 — by appfigures" style="width: 100%; height: auto; display: block; border-radius: 10px;"/>
+        </div>
+      </div>
+
+      <!-- RIGHT: callouts -->
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 28px; padding: 88px 88px 88px 36px;">
+        <div class="stack" style="gap: 14px;">
+          <div class="eyebrow">January 2026 · top 10 worldwide</div>
+          <h2 class="title huge" style="font-size: 88px; line-height: 0.98;">Every app<br/>here is solving<br/><em>a problem.</em></h2>
+        </div>
+
+        <ul class="stack" style="list-style: none; padding: 0; margin: 0; gap: 18px;">
+          <li class="row" style="gap: 18px; align-items: flex-start;">
+            <div class="mono" style="font-size: 16px; font-weight: 800; color: var(--brand-cta); letter-spacing: 0.12em; min-width: 110px; padding-top: 6px;">CHATGPT</div>
+            <div class="body-md" style="color: var(--fg-1); flex: 1;">"I'm stuck and I want to think out loud — without anyone judging me."</div>
+          </li>
+          <li class="row" style="gap: 18px; align-items: flex-start;">
+            <div class="mono" style="font-size: 16px; font-weight: 800; color: var(--brand-violet); letter-spacing: 0.12em; min-width: 110px; padding-top: 6px;">TIKTOK</div>
+            <div class="body-md" style="color: var(--fg-1); flex: 1;">"I have 30 seconds and I want to feel something."</div>
+          </li>
+          <li class="row" style="gap: 18px; align-items: flex-start;">
+            <div class="mono" style="font-size: 16px; font-weight: 800; color: var(--brand-pink); letter-spacing: 0.12em; min-width: 110px; padding-top: 6px;">SNAPCHAT</div>
+            <div class="body-md" style="color: var(--fg-1); flex: 1;">"Send a goofy face to my best friend in two taps."</div>
+          </li>
+          <li class="row" style="gap: 18px; align-items: flex-start;">
+            <div class="mono" style="font-size: 16px; font-weight: 800; color: var(--brand-blue-deep); letter-spacing: 0.12em; min-width: 110px; padding-top: 6px;">MAPS</div>
+            <div class="body-md" style="color: var(--fg-1); flex: 1;">"I'm lost. Get me there without me having to think."</div>
+          </li>
+          <li class="row" style="gap: 18px; align-items: flex-start;">
+            <div class="mono" style="font-size: 16px; font-weight: 800; color: #1A7A4F; letter-spacing: 0.12em; min-width: 110px; padding-top: 6px;">CAPCUT</div>
+            <div class="body-md" style="color: var(--fg-1); flex: 1;">"I want to edit a video and I am not a film school grad."</div>
+          </li>
+        </ul>
+
+        <p class="body-md mono" style="color: var(--fg-1); font-weight: 700; padding-top: 18px; border-top: 1px dashed var(--stroke-2);">
+          Hundreds of millions of downloads. Same job: <span style="color: var(--brand-cta);">solving a real problem better than what came before.</span>
+        </p>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>17 · Top apps</span></div>
+  </section>
+
   <!-- ───────────────────────── 16 · ASK & RECALL ───────────────── -->
-  <section data-label="17 Ask and recall" class="bg-mesh">
+  <section data-label="18 Ask and recall" class="bg-mesh">
     <div class="frame stack" style="gap: 36px;">
       <div class="row" style="gap: 16px; align-items: center;">
         <div class="pill" style="background: var(--brand-cta); color: white; border: none;">
@@ -1045,11 +1175,11 @@
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>17 · Ask & recall</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>18 · Ask & recall</span></div>
   </section>
 
   <!-- ───────────────────────── 17 · IDENTIFY THE FRICTION ─────── -->
-  <section data-label="18 Identify the friction" class="bg-cream">
+  <section data-label="19 Identify the friction" class="bg-cream">
     <div class="frame stack" style="gap: 36px;">
       <div class="row" style="gap: 16px; align-items: center;">
         <div class="pill" style="background: var(--brand-blue); color: white; border: none;">
@@ -1079,17 +1209,17 @@
             <span style="background: var(--brand-peach); color: var(--fg-1); font-family: var(--font-mono); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 999px; text-transform: uppercase;">Amber's pro tip</span>
           </div>
           <p class="body-md" style="font-weight: 600; color: var(--fg-1); line-height: 1.4;">
-            Designers look for <em>energy leaks</em> — the moments you feel annoyed, stuck, or like you're doing the same dumb thing for the tenth time.
+            Designers look for <em>energy leaks</em> — the moments you feel annoyed, stuck, or like you're repeating the same task for the tenth time.
           </p>
           <p class="body-md" style="color: var(--fg-2);">That's exactly what you should write down.</p>
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>18 · Friction</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>19 · Friction</span></div>
   </section>
 
   <!-- ───────────────────────── 13 · CRAZY EIGHTS ──────────────── -->
-  <section data-label="19 Crazy Eights" class="bg-ink">
+  <section data-label="20 Crazy Eights" class="bg-ink">
     <div class="frame stack" style="justify-content: center; gap: 48px; position: relative;">
       <div class="orb" style="width: 600px; height: 600px; background: var(--brand-pink); top: -200px; right: -150px;"></div>
       <div class="orb" style="width: 500px; height: 500px; background: var(--brand-blue); bottom: -150px; left: -100px;"></div>
@@ -1104,11 +1234,43 @@
         and sketch 8 different ideas — one per box — in 8 minutes.
       </p>
     </div>
-    <div class="chrome on-dark"><span class="brand">UX 101</span><span>19 · Exercise</span></div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>20 · Exercise</span></div>
+  </section>
+
+  <!-- ───────────────────────── 20 · WHAT IT LOOKS LIKE ───────── -->
+  <section data-label="21 What it looks like" class="bg-paper" style="padding: 0;">
+    <div style="position: absolute; inset: 0; display: grid; grid-template-columns: 1.05fr 1fr;">
+      <!-- LEFT: photo bleed -->
+      <div style="position: relative; overflow: hidden;">
+        <img src="assets/crazy-eights-example.jpg" alt="A real Crazy Eights paper covered in 8 hand-drawn UI sketches" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"/>
+        <!-- corner sticker -->
+        <div style="position: absolute; top: 64px; left: 64px; background: var(--brand-cta); color: white; padding: 14px 22px; border-radius: 999px; font-family: var(--font-header); font-weight: 800; letter-spacing: 0.12em; font-size: 18px; box-shadow: 0 12px 28px rgba(0,0,0,0.18);">REAL DESIGNERS · REAL PAPER</div>
+      </div>
+
+      <!-- RIGHT: text panel -->
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 36px; padding: 110px 96px;">
+        <div class="eyebrow">This is what it looks like</div>
+        <h2 class="title huge" style="font-size: 108px; line-height: 0.98;">Messy.<br/>On purpose.</h2>
+        <div class="stack" style="gap: 22px;">
+          <p class="body-lg" style="color: var(--fg-2); max-width: 700px;">
+            Real designers, real paper, real pens. Eight rough boxes. No erasing, no apologizing, no waiting for the "good" idea — just <span class="mono" style="font-weight: 700; color: var(--fg-1);">eight tries</span> in eight minutes.
+          </p>
+          <p class="body-lg" style="color: var(--fg-2); max-width: 700px;">
+            Notice what's <em>not</em> there: no neat type, no perfect rectangles, no color. <span class="mono" style="font-weight: 700; color: var(--fg-1);">Bad sketches are the goal</span> — they're how you find good ideas.
+          </p>
+        </div>
+
+        <div class="row" style="gap: 28px; padding-top: 8px; border-top: 1px solid var(--stroke-2); align-items: baseline;">
+          <div class="mono" style="font-size: 36px; font-weight: 800; color: var(--brand-cta);">8</div>
+          <div class="micro mono" style="color: var(--fg-3); letter-spacing: 0.16em;">BOXES · 8 MINUTES · 60 SECONDS EACH</div>
+        </div>
+      </div>
+    </div>
+    <div class="chrome"><span class="brand">UX 101</span><span>21 · Example</span></div>
   </section>
 
   <!-- ───────────────────────── 14 · GOAL + RULES (combined) ──── -->
-  <section data-label="20 The goal and the rules" class="bg-paper">
+  <section data-label="22 The goal and the rules" class="bg-paper">
     <div class="frame stack" style="gap: 32px;">
       <div class="stack" style="gap: 14px;">
         <div class="eyebrow">Crazy Eights · how it works</div>
@@ -1122,6 +1284,10 @@
           <div class="ce-grid" style="flex: 1;">
             <div class="ce-cell" style="background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
               <span class="num" style="color: var(--brand-blue-deep); font-weight: 700;">1</span>
+              <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Basic<br/>idea</span>
+            </div>
+            <div class="ce-cell" style="background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
+              <span class="num" style="color: var(--brand-blue-deep); font-weight: 700;">2</span>
               <span class="sketch mono" style="font-size: 26px; color: var(--fg-2); font-weight: 600; text-align: center; line-height: 1.3;">Basic<br/>idea</span>
             </div>
             <div class="ce-cell" style="background: rgba(92, 124, 250, 0.08); border-color: var(--brand-blue);">
@@ -1179,22 +1345,22 @@
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>20 · Rules</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>22 · Rules</span></div>
   </section>
 
   <!-- ───────────────────────── 15 · GO ─────────────────────────── -->
-  <section data-label="21 Go" class="bg-aurora">
+  <section data-label="23 Go" class="bg-aurora">
     <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 32px;">
       <div class="eyebrow on-dark">Pencils up</div>
       <h2 class="title giant" style="color: white;">8:00</h2>
       <p class="title" style="color: white; font-size: 64px;">Go.</p>
       <p class="body-lg" style="color: rgba(255,255,255,0.85);">Draw fast. Draw weird. Don't stop.</p>
     </div>
-    <div class="chrome on-dark"><span class="brand">UX 101</span><span>21 · Sketch</span></div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>23 · Sketch</span></div>
   </section>
 
   <!-- ───────────────────────── 21 · PARTNER CRIT ──────────────── -->
-  <section data-label="22 Partner crit" class="bg-paper">
+  <section data-label="24 Partner crit" class="bg-paper">
     <div class="frame stack" style="gap: 36px;">
       <div class="row" style="gap: 16px; align-items: center;">
         <div class="pill" style="background: var(--brand-violet); color: white; border: none;">
@@ -1227,11 +1393,11 @@
         In tech we never build the first thing we think of. We show messy sketches to teammates so the idea gets <span class="mono" style="font-weight: 700; color: var(--fg-1);">stronger.</span>
       </p>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>22 · Crit</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>24 · Crit</span></div>
   </section>
 
   <!-- ───────────────────────── 22 · FINAL FRAME ───────────────── -->
-  <section data-label="23 Final frame" class="bg-mesh">
+  <section data-label="25 Final frame" class="bg-mesh">
     <div class="frame stack" style="gap: 36px;">
       <div class="row" style="gap: 16px; align-items: center;">
         <div class="pill" style="background: var(--brand-cta); color: white; border: none;">
@@ -1263,22 +1429,22 @@
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>23 · Refine</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>25 · Refine</span></div>
   </section>
 
   <!-- ───────────────────────── 24 · 5-MIN TIMER ─────────────── -->
-  <section data-label="24 Final frame timer" class="bg-aurora">
+  <section data-label="26 Final frame timer" class="bg-aurora">
     <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 32px;">
       <div class="eyebrow on-dark">Solo · refine your favorite</div>
       <h2 class="title giant" style="color: white;">5:00</h2>
       <p class="title" style="color: white; font-size: 64px;">Make it real.</p>
       <p class="body-lg" style="color: rgba(255,255,255,0.85); max-width: 1100px;">Take the feedback. Pick the one idea you love most. Draw it bigger, with labels — like it's a real screen.</p>
     </div>
-    <div class="chrome on-dark"><span class="brand">UX 101</span><span>24 · Refine</span></div>
+    <div class="chrome on-dark"><span class="brand">UX 101</span><span>25 · Refine</span></div>
   </section>
 
   <!-- ───────────────────────── 23 · GROUP SHARE ───────────────── -->
-  <section data-label="25 Group share" class="bg-cream">
+  <section data-label="27 Group share" class="bg-cream">
     <div class="frame stack" style="gap: 36px;">
       <div class="row" style="gap: 16px; align-items: center;">
         <div class="pill" style="background: var(--brand-pink); color: white; border: none;">
@@ -1288,7 +1454,7 @@
       </div>
       <div class="stack" style="gap: 12px;">
         <div class="eyebrow">Step 6 · Show the room</div>
-        <h2 class="title">Who wants to <em>share theirs?</em></h2>
+        <h2 class="title">Who wants to <em>share?</em></h2>
       </div>
 
       <div class="row grow" style="gap: 32px; align-items: stretch;">
@@ -1307,11 +1473,11 @@
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>25 · Share</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>27 · Share</span></div>
   </section>
 
   <!-- ───────────────────────── 19 · DEBRIEF ────────────────────── -->
-  <section data-label="26 What you just did" class="bg-paper">
+  <section data-label="28 What you just did" class="bg-paper">
     <div class="frame stack" style="gap: 40px; position: relative;">
       <!-- decorative orbs -->
       <div class="orb" style="width: 480px; height: 480px; background: var(--brand-pink); top: -160px; left: -120px; opacity: 0.3;"></div>
@@ -1407,11 +1573,11 @@
         </div>
       </div>
     </div>
-    <div class="chrome"><span class="brand">UX 101</span><span>26 · Debrief</span></div>
+    <div class="chrome"><span class="brand">UX 101</span><span>28 · Debrief</span></div>
   </section>
 
   <!-- ───────────────────────── 20 · IF THIS WAS FUN ────────────── -->
-  <section data-label="27 If this was fun" class="bg-mesh">
+  <section data-label="29 If this was fun" class="bg-mesh">
     <div class="frame stack" style="gap: 48px;">
       <div class="stack" style="gap: 16px;">
         <div class="eyebrow">Keep going</div>
@@ -1420,16 +1586,16 @@
 
       <div class="row grow" style="gap: 32px;">
         <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
-          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-blue-deep);">This week</div>
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-blue-deep);">Try today</div>
           <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Open any app you use. Find one thing that annoys you. Sketch a fix.</p>
         </div>
         <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
-          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-violet);">This month</div>
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-violet);">Evolve your app</div>
           <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Try Figma (it's free). Rebuild a screen from your favorite app, your way.</p>
         </div>
         <div class="glass" style="flex: 1; padding: 40px; display: flex; flex-direction: column; gap: 18px;">
-          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-peach);">This year</div>
-          <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Look up "design clubs" near you. Or start one. Pizza + sketching = real.</p>
+          <div class="mono" style="font-size: 28px; font-weight: 800; color: var(--brand-peach);">Tonight</div>
+          <p class="body-md" style="color: var(--fg-1); font-weight: 600;">Prompt an AI to build your idea. Upload your sketch, describe it, and see it come to life. How far can you get into the build?</p>
         </div>
       </div>
     </div>
@@ -1437,7 +1603,7 @@
   </section>
 
   <!-- ───────────────────────── 21 · THANKS ─────────────────────── -->
-  <section data-label="28 Thanks" class="bg-hero">
+  <section data-label="30 Thanks" class="bg-hero">
     <div class="frame stack" style="justify-content: center; align-items: center; text-align: center; gap: 40px;">
       <div class="eyebrow">That's the workshop</div>
       <h2 class="title huge">Thanks for<br/>designing with me.</h2>
@@ -1452,33 +1618,35 @@
 
 <script type="application/json" id="speaker-notes">
 [
-  "Hey everyone! I'm Amber. Quick show of hands — who has a phone or tablet they use pretty much every day? Basically everybody. Today we're going to talk about the people who design what's on those screens. Not the engineers who code it — the designers who decide what it looks like, where the buttons go, and how it feels to use. Heads up: this is not a sit-still kind of workshop. You will be standing up and walking around in about ten minutes. By the end of 45 minutes, you're going to do exactly what I do at work.",
-  "Here's the plan. Five minutes of me talking about what tech jobs actually look like. Then about eight minutes on what UX is, with examples you'll recognize. Then we get on our feet for a room-spectrum activity. Then I'll have you each pick a real-life problem that bugs YOU — and we'll spend twenty minutes on Crazy Eights: sketch eight solutions, get partner feedback, refine your favorite, and a few of you will share with the room. We wrap with five minutes of debrief. Stop me with questions any time.",
-  "So a quick bit about me. I'm Amber, and I lead a UX team at Google — that's my day job. But I want you to notice something: I'm not just a 'tech person.' Outside of work I paint, I'm writing a novel, and I make music with a project called Ada Fen. The reason I'm telling you that is because most people think working in tech means you have to be a coder. That's not true. I don't write code. I spend my day solving problems for people. If you can draw, if you can make music, or if you just know when an app feels broken — you already have the skills to be a designer.",
-  "Quick myth-bust. When people say 'tech jobs,' most of you probably picture someone in a hoodie typing code at 3 a.m. That's a real job — engineers are awesome — but it's maybe a third of the people who make an app. Before any code gets written, a whole team has already decided what to build, who it's for, and how it should feel. Those people aren't engineers. One of them is me.",
-  "OK, so what is UX? UX stands for 'user experience.' My job is to make sure that when you pick up an app for the first time, it just makes sense. You don't have to ask a friend how to use it. You don't get lost. You don't rage-quit. I design the path you take through the app — not just what it looks like, but where you go, what happens when you tap, and how you feel along the way.",
-  "Quick detour, because everybody's asking about it: AI. Most people think AI is a smart robot that knows everything. It's not. The way I think about it: AI is a really fast, really powerful intern. Great at following patterns. Doesn't actually KNOW anything until somebody teaches it — and that somebody is a designer. Designing for AI means three jobs. ONE: GUARDRAILS — AI says weird, wrong, sometimes harmful stuff, and designers build the safety nets. TWO: PERSONALITY — should it sound like a serious professor or a chill friend? A designer made that choice. THREE: INTENT — when you ask AI for help, it has to guess what you actually want, and designers help it read the room. At Google we call this Agentic UX — the tech does work for you so you spend more time being creative.",
-  "You already know the difference between good and bad UX — you just haven't had a name for it. Bad UX is a door that says PUSH but you have to pull. An app that hides the back button. A form that erases everything when you mistype one character. It makes you feel dumb — but you're not dumb, the design is dumb. Good UX is the opposite. Snapchat opens straight to the camera because that's what you came for. Good UX is invisible. You don't notice it. That's the goal.",
-  "OK — stand up. Everybody. Push the chairs back if you need to. The left wall is 'I HATE IT.' The right wall is 'I LOVE IT.' I'm going to ask you four questions, and after each one you walk to where you actually feel — left, right, anywhere in the middle. No talking, just move.",
+  "Hi everyone, I'm Amber. Quick show of hands — who uses a phone or tablet pretty much every day? Right, basically everybody. Today we're going to talk about the people who design what's on those screens. Not the engineers or now AI who code it — the designers who decide what it looks like, where the buttons go, and how it feels to use. Heads up: this is not a sit-still kind of workshop. You'll be standing up and walking around in about ten minutes. And by the end of 45 minutes, you're going to do exactly what I do at work.",
+  "Here's the plan. Five minutes of me talking about what tech jobs actually look like. Then about eight minutes on what UX is, with examples you'll recognize. Then we get on our feet for a room-spectrum activity. Then I'll have you each pick a real-life problem that bothers YOU — and we'll spend twenty minutes on Crazy Eights: sketch eight solutions, get partner feedback, refine your favorite, and a few of you will share with the room. We wrap with five minutes of debrief. Feel free to stop me with questions any time.",
+  "A quick bit about me. I'm Amber, and I lead a UX team at Google — that's my day job. But I want you to notice something: I'm not just a 'tech person.' Outside of work I paint, I'm writing a novel, and I make music with a project called Ada Fen. The reason I'm telling you that is because most people think working in tech means you have to be a coder. That's not true. I don't write code. I spend my day solving problems for people. If you can draw, if you can make music, or if you just know when an app feels broken — you already have the skills to be a designer.",
+  "Quick myth to bust. When people say 'tech jobs,' most of you probably picture someone in a hoodie typing code at three in the morning. That's a real job — engineers are essential — but it's maybe a third of the people who make an app. Before any code gets written, a whole team has already decided what to build, who it's for, and how it should feel. Those people aren't engineers. One of them is me.",
+  "So what is UX? UX stands for 'user experience.' My job is to make sure that when you pick up an app for the first time, it just makes sense. You don't have to ask a friend how to use it. You don't get lost. You don't give up and close it. I design the path you take through the app — not just what it looks like, but where you go, what happens when you tap, and how you feel along the way.",
+  "Quick detour, because everybody's asking about it: AI. Most people think AI is a smart robot that knows everything. It's not. The way I think about it: AI is a really fast, really capable intern. Great at following patterns. But it doesn't actually KNOW anything until somebody teaches it — and that somebody is a designer. Designing for AI means three jobs. ONE — GUARDRAILS: AI says weird, wrong, sometimes harmful things, and designers build the safety nets. TWO — PERSONALITY: should it sound like a serious professor or a friendly tutor? A designer made that choice. THREE — INTENT: when you ask AI for help, it has to guess what you actually want, and designers help it read the room. At Google we call this Agentic UX — the technology does work for you so you spend more time being creative.",
+  "You already know the difference between good and bad UX — you just haven't had a name for it. Bad UX is a door that says PUSH but you have to pull. An app that hides the back button. A form that erases everything when you mistype one character. It makes you feel like you got something wrong — but you didn't. The design did. Good UX is the opposite. Snapchat opens straight to the camera because that's what you came for. Good UX is invisible. You don't notice it. That's the goal.",
+  "Time to stand up. Everybody. Push the chairs back if you need to. The left wall is 'I HATE IT.' The right wall is 'I LOVE IT.' I'm going to ask you four questions, and after each one you walk to where you actually feel — left, right, anywhere in the middle. No talking, just move.",
   "Question one. How do you feel about how TikTok or YouTube picks the next video for you? Move now. [Pause five seconds.] Look around. Notice the spread. [Optional: ask one person on each side why.]",
-  "Question two. Talking to an AI like it's a person — giving it a name, asking it for advice, just venting to it after a bad day. Walk LEFT if that's WEIRD — you'd rather talk to a real human, or honestly to nobody. Walk RIGHT if it's HELPFUL — easy, low-pressure, no judgment. Anywhere in between is fine. [Look around.] OK — here's the thing. There's no right answer, but here's why I'm asking: somebody at every AI company decided whether that thing sounds like a robot reading a manual, or like a chill friend. That's a real design choice — we call it personality design. The AI didn't pick its own voice. A human did.",
-  "Question three. How do you feel about the notifications your phone sends you every day? Move. [Pause.] Anybody in the middle — what would have to change to push you all the way to the right? [Take one or two answers.] Whatever they just said — that's the design goal. That's literally what UX designers chase every day.",
-  "Last question, and it's a different one: walk LEFT if you think AI is going to make your life EASIER, RIGHT if you think it's going to make things more CONFUSING. Move. [Pause.] If YOU were the boss of an AI today, what's the first chore you'd give it to do? [Take one or two answers — anything goes.] Hold that thought, because in a few minutes you're going to design one. Everybody sit back down.",
-  "Let's get back in the middle of the room — this one's a bit more serious. AI. You hear about it constantly. I want to know how you actually feel. Three options. Walk to the LEFT WALL if you think AI is going to be the best tool humans ever invented — it'll do your chores, help you create, solve big problems. Walk to the RIGHT WALL if AI is honestly kind of scary — you're worried about it taking over, being creepy, or making it impossible to know what's real. Stay in the MIDDLE if you're just confused and think the whole thing is overhyped. Go. [Pause, look around.] Pick one or two from each side and ask them why. There's no right answer. The reason I'm asking is because every designer working on AI right now is reading this exact room — your gut feeling is data. OK, walk back to your seats.",
+  "Question two. Talking to an AI like it's a person — giving it a name, asking it for advice, or just venting to it after a hard day. Walk LEFT if that's WEIRD — you'd rather talk to a real person, or honestly to no one. Walk RIGHT if it's HELPFUL — easy, low-pressure, no judgment. Anywhere in between is fine. [Look around.] Here's the thing. There's no right answer, but the reason I'm asking is this: somebody at every AI company decided whether that thing sounds like a robot reading a manual, or like a friendly tutor. That's a real design choice — we call it personality design. The AI didn't pick its own voice. A human did.",
+  "Question three. How do you feel about the notifications your phone sends you every day? Move. [Pause.] Anybody in the middle — what would have to change to push you all the way to the right? [Take one or two answers.] Whatever they just said — that's the design goal. That's exactly what UX designers chase every day.",
+  "Last question — and this one's about the elephant in every classroom: AI doing your homework. Walk LEFT if it feels like CHEATING — using AI to write your essay or summarize the chapter is wrong, you should do it yourself. Walk RIGHT if it feels like a CALCULATOR — it's just a tool, the same way nobody asks you to do long division by hand anymore. Anywhere in the middle if it depends. Move. [Pause, look around.] [Take one or two answers from different spots in the room — what makes the difference for them?] Here's why I'm asking. Every AI product right now is making this exact decision: how much should it do for you, and how much should it make you do yourself? Designers call that 'intent design.' There is no neutral default — somebody picks. Hold that thought, because in a few minutes you're going to design one yourself. Everybody walk back to your seats.",
+  "Let's get back in the middle of the room — this one's a little more serious. AI. You hear about it constantly. I want to know how you actually feel. Three options. Walk to the LEFT WALL if you think AI is going to be the best tool humans ever invented — it'll handle chores, help you create, solve big problems. Walk to the RIGHT WALL if AI honestly worries you — you're concerned about it taking over, becoming intrusive, or making it impossible to know what's real. Stay in the MIDDLE if you're just confused and think the whole thing is overhyped. Go. [Pause, look around.] Pick one or two from each side and ask them why. There's no right answer. The reason I'm asking is that every designer working on AI right now is reading this exact room — your gut feeling is data. Okay, walk back to your seats.",
   "If a UX designer could only ever ask one question on the job, it would be this one. Who is this for, and what are they trying to do? Every screen, every button, every word you see in any app — somebody answered some version of this question to put it there. When you start sketching in a few minutes, that's the question I want you holding in your head.",
-  "Here's how a real product gets made, super simplified. Step 1, NOTICE — find a real problem. Step 2, IMAGINE — sketch a ton of ideas, fast and messy. Step 3, TRY — pick the best, build a rough version, hand it to a real person. Step 4, FIX — watch where they get stuck, change it, do it again. Forever. Today we're skipping straight to step 2 — the imagining part — because it's the most fun and it's where ideas come from.",
-  "Weird truth before we sketch. Your first idea? Almost never your best. The first idea is the obvious one — also the one everyone else just thought of. Around your third or fourth idea it gets interesting — you've left the cliché behind. By idea seven or eight you're inventing things. That's where actual products come from. So we don't ask designers for one great idea. We ask for eight bad ones, because hidden inside those eight is one great one.",
-  "OK, before we sketch — your favorite apps are not magic. They're solutions. Quick round-robin: tell me one app or program you use every single day. Could be a game, a social app, a school tool. [Take 5–6 answers — Discord, Roblox, Spotify, YouTube, TikTok, whatever.] Now follow up on each one: 'What problem does this solve for you?' If they say boredom, push: 'Does it help you connect with friends, or find new music you actually like?' If they say Discord, push: 'Why is this better than just texting?' Here's the takeaway: every app you love exists because it solves a problem better than the thing that came before it. That's literally the whole job. Now we're going to do the same thing — except YOU pick the problem.",
-  "Take out a piece of paper. At the very top, I want you to write down ONE thing in your daily life that frustrates you. It can be inside an app you already use, or out in the real world — finding your gym shoes, keeping track of homework across five teachers, splitting the bill at lunch, group chats that won't stop. Designers call these 'energy leaks' — the moments where you feel annoyed or stuck. Whatever's bugging you the most right now — write it at the top of the page. One sentence. You have a couple of minutes. This is the problem you're going to solve.",
-  "This is Crazy Eights — a real exercise the design team at Google uses. 8 ideas, 8 boxes, 8 minutes — 60 seconds per box. The 'crazy' part is the speed — you don't have time to second-guess yourself, and that's the whole point.",
-  "Here's the goal: sketch eight ways to fix the problem you just wrote at the top of your paper. The trick is what goes in each box. Boxes 1 through 4 — basic ideas, the obvious stuff, get them out fast so they stop blocking you. Boxes 5, 6, 7 — different KINDS of solutions: what if it was voice instead of buttons? What if it was just one giant button? And here's the AI twist — in box 5 or 6, your app has an AI assistant. You decide how it shows up: a chat bubble you talk to, a voice, or a hidden helper that just works in the background. Sketch THAT. Box 8 — something that sounds impossible today, no rules, go nuts. Three rules: 60 seconds per box. Drawings only — no words. No wrong answers. And no erasing — if you mess up, just move on. Fold your paper into 8 boxes now — in half, in half, in half.",
-  "Pencils up, paper folded? Eight minutes on the clock starting NOW. 60 seconds per box. Draw fast. Draw weird. Don't stop, even if you think the idea is stupid — just put it down and move to the next box. I'll call out the change every minute. Go!",
-  "Time. Pencils down. Now we get feedback before anybody falls in love with their first idea — turn to whoever is sitting next to you. Designers call this a 'crit.' Sounds scary, isn't. You're going to show your partner all 8 boxes — don't apologize for them, don't explain, just show. They're going to give you two things, and ONLY two things. One: 'The most helpful part is BLANK.' Two: 'One thing that's still confusing is BLANK.' That's it. Specific, not 'this is cool' — specific. Then swap. Two minutes each way. In tech we never build the first thing we think of. We show messy work to teammates and the idea gets stronger. That's what you're doing right now. Go.",
+  "Here's how a real product gets made, simplified. Step one, NOTICE — find a real problem. Step two, IMAGINE — sketch a lot of ideas, fast and messy. Step three, TRY — pick the best, build a rough version, hand it to a real person. Step four, FIX — watch where they get stuck, change it, do it again. Forever. Today we're skipping straight to step two — the imagining part — because it's the most fun and it's where ideas come from.",
+  "An interesting truth before we sketch. Your first idea? Almost never your best. The first idea is the obvious one — also the one everyone else just thought of. Around your third or fourth idea it gets interesting — you've left the cliché behind. By idea seven or eight you're inventing things. That's where actual products come from. So we don't ask designers for one great idea. We ask for eight average ones, because hidden inside those eight is one great one.",
+  "Quick reality check before we get into the exercise. This is real data — the most downloaded apps in the world right now, January 2026. Take a look. ChatGPT, TikTok, Instagram, Snapchat, Maps, CapCut. Hundreds of millions of downloads. What do they all have in common? Every single one solves a real problem better than what came before it. ChatGPT — 'I'm stuck and I want to think out loud without anyone judging me.' TikTok — 'I have 30 seconds and I want to feel something.' Snapchat — send a goofy face to your best friend in two taps. Maps — get me there without thinking. CapCut — let me edit a video without going to film school. Pause on this — every billion-dollar app on this chart started as ONE designer asking 'what's annoying right now, and what would fix it?' That's the entire job. Now it's your turn.",
+  "Before we sketch — your favorite apps are not magic. They're solutions. Quick round-robin: tell me one app or program you use every single day. Could be a game, a social app, a school tool. [Take five or six answers — Discord, Roblox, Spotify, YouTube, TikTok, whatever they say.] Now follow up on each one: 'What problem does this solve for you?' If they say boredom, push gently: 'Does it help you connect with friends, or find new music you actually like?' If they say Discord, push: 'Why is this better than just texting?' Here's the takeaway: every app you love exists because it solves a problem better than the thing that came before it. That's the whole job. Now we're going to do the same thing — except YOU pick the problem.",
+  "Take out a piece of paper. At the very top, write down ONE thing in your daily life that frustrates you. It can be inside an app you already use, or out in the real world — finding your gym shoes, keeping track of homework across five teachers, splitting the bill at lunch, group chats that won't stop. Designers call these 'energy leaks' — the moments where you feel annoyed or stuck. Whatever's bothering you the most right now — write it at the top of the page. One sentence. You have a couple of minutes. This is the problem you're going to solve.",
+  "This is Crazy Eights — a real exercise the design team at Google uses. Eight ideas, eight boxes, eight minutes — sixty seconds per box. The 'crazy' part is the speed — you don't have time to second-guess yourself, and that's the whole point.",
+  "Quick — this is what it actually looks like in the real world. Look at this photo. These are designers at a real Google workshop. Notice three things. One: it's messy. Stick figures, scribbles, no straight lines. Two: there's no eraser anywhere on this table. Three: most of these ideas are NOT going to make it into the final product — and that is fine, that's the design. The whole point is to fill the page with options before you fall in love with one. Your sketches today are going to look exactly like this — and that's a win, not a problem.",
+  "Here's the goal: sketch eight ways to fix the problem you just wrote at the top of your paper. The trick is what goes in each box. Boxes one through four — basic ideas, the obvious stuff, get them out fast so they stop blocking you. Boxes five, six, seven — different KINDS of solutions: what if it was voice instead of buttons? What if it was just one giant button? And here's the AI twist — in box five or six, your app has an AI assistant. You decide how it shows up: a chat bubble you talk to, a voice, or a hidden helper that just works in the background. Sketch THAT. Box eight — something that sounds impossible today. No rules, be ambitious. Three rules: sixty seconds per box. Drawings only — no words. No wrong answers. And no erasing — if you mess up, just move on. Fold your paper into eight boxes now — in half, in half, in half.",
+  "Pencils up, paper folded? Eight minutes on the clock starting NOW. Sixty seconds per box. Draw fast. Draw boldly. Don't stop, even if you think the idea is weak — just put it down and move to the next box. I'll call out the change every minute. Go!",
+  "Time's up. Pencils down. Now we get feedback before anybody falls in love with their first idea — turn to whoever is sitting next to you. Designers call this a 'crit.' It sounds intimidating; it isn't. You're going to show your partner all eight boxes — don't apologize for them, don't explain, just show. They're going to give you two things, and only two things. One: 'The most helpful part is BLANK.' Two: 'One thing that's still confusing is BLANK.' That's it. Specific, not 'this is cool' — specific. Then swap. Two minutes each way. In tech we never build the first thing we think of. We show messy work to teammates and the idea gets stronger. That's what you're doing right now. Go.",
   "Last creative push. Take the feedback you just got from your partner and pick your one best idea. Two minutes. Flip the paper over and draw a more flushed-out version on the back — the whole page. And listen — 'flushed out' does NOT mean 'perfect art.' I'm a painter; I know the difference between pretty and clear. What I want is clarity. Strong composition. One main button. One main thing the user sees first. Make it so I could understand the idea without you saying a word. That's the whole bar. Go.",
   "Five minutes on the clock. Solo. Take the feedback your partner just gave you, pick the ONE idea you love most — usually it's not your first one — and draw it again, bigger. Add labels. What does the user tap? What happens next? Pretend this is a real screen. This is the version you're going to show the room. Three, two, one, go.",
   "OK — last bit before we wrap. I want three to five volunteers to stand up and share. Don't be shy — nobody's work is done, that's the whole point. When you stand up, you tell us TWO things only. One: the problem you picked. Just one sentence. Two: the solution. Hold up your page, point at it, talk us through it. No apologizing, no 'it's not done' — nothing's ever done. Show it anyway. [Take 3–5 volunteers, ~1 minute each. Reflect back what's strong about each one in a sentence.] Look at what you all just pulled off. You identified a problem. You brainstormed. You got feedback. You iterated. You shared. That is the EXACT process we use at Google. You just did it.",
   "Welcome back. Look at what you just pulled off. You took a real-world problem and turned it into product ideas — that's literally UX design, you just did it. You generated 8 ideas before falling in love with one — that's how every actual designer at every actual company gets unstuck. You showed work that wasn't done yet to someone else and survived — that's 90% of working as a designer. And you did all of it on paper. Designers at Google, Apple, Snapchat still start every project on paper. You're already doing the real thing.",
-  "If any part of this was fun, here's what to do next. This week: open any app you use, find one thing that annoys you, sketch a fix on paper. That's all. This month: try Figma — it's free, and you can rebuild any screen from any app the way YOU think it should look. This year: look up design clubs at your school or local library. If there isn't one, start one. The internet has a million free UX tutorials. The hardest part is starting, and you already started today.",
+  "If any part of this was fun, here's what to do next. Try today: open any app you use, find one thing that annoys you, sketch a fix on paper. That's all. Evolve your app: try Figma — it's free, and you can rebuild any screen from any app the way YOU think it should look. This year: look up design clubs at your school or local library. If there isn't one, start one. The internet has a million free UX tutorials. The hardest part is starting, and you already started today.",
   "That's the workshop. You officially have one UX exercise under your belt — that's one more than most adults walking around. Hold on to your sketches. I'm serious — keep them. In a few years, when somebody asks why you got into design, you'll have the actual paper to show them. Thanks for designing with me today. What questions do you have?"
 ]
 </script>
